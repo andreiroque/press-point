@@ -26,7 +26,7 @@ This is our final project in Web Development. It is an e-commerce website with b
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/andreiroque/e-commerce.git
+git clone https://github.com/andreiroque/press-point.git
 
 ```
 
