@@ -1,3 +1,9 @@
+<?php 
+
+require("connection.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,5 +23,8 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body></body>
+  <body>
+  </body>
 </html>
+
+<?php mysqli_close($conn)?>
