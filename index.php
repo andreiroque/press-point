@@ -152,13 +152,6 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
             </div>
             <div class="row">
                 <img src="product-images/drift-press.png" alt="">
@@ -180,13 +173,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/fusion-press.png" alt="">
@@ -208,13 +195,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/impulse-press.png" alt="">
@@ -236,13 +217,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/krypton-press.png" alt="">
@@ -264,13 +239,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/nexus-press.png" alt="">
@@ -292,13 +261,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/quarion-press.png" alt="">
@@ -320,13 +283,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/stratus-press.png" alt="">
@@ -348,13 +305,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/valor-press.png" alt="">
@@ -376,13 +327,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
             <div class="row">
                 <img src="product-images/zion-press.png" alt="">
@@ -404,13 +349,7 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                <div class="cart-icon">
-                    <a href="shopping-cart.html">
-                        <button class="button-icon">
-                            <i class='bx bx-cart'></i>
-                        </button>
-                    </a>
-                </div>
+                
             </div>
         </div>
     </section>
