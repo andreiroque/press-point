@@ -72,7 +72,7 @@ include "connection.php";
             <button type="submit" class="sign-in-button">Sign Up</button>
           </form>
           <div class="sign-up-container">
-            <p>Already have an account? <a href="sign-in.html">Sign In</a></p>
+            <p>Already have an account? <a href="sign-in.php">Sign In</a></p>
           </div>
         </div>
       </div>
