@@ -1,0 +1,214 @@
+body {
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    list-style: none;
+    margin: 0;
+    padding-top: 125px;
+    scroll-behavior: smooth;
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px auto;
+    max-width: 1250px;
+    width: 95%;
+}
+
+.image-section {
+    border: 1.5px solid rgb(120, 180, 205);
+    flex: 1;
+    min-width: 300px;
+}
+
+.image-section img {
+    width: 100%;
+}
+
+.details-section {
+    background: rgb(255, 255, 255);
+    border: 1.5px solid rgb(120, 180, 205);
+    flex: 1;
+    min-width: 300px;
+    padding: 40px;
+}
+
+.details-section h1 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.details-section p {
+    color: rgb(0, 0, 0);
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.details-section .price {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.details-section .stock-information {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.details-section .options {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.details-section .options label {
+    flex: 1;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.details-section .options select,
+.details-section .quantity-wrapper {
+    align-items: center;
+    display: flex;
+    flex: 2;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.details-section .options select {
+    flex: none;
+}
+
+.details-section .quantity-wrapper button {
+    border: 1px solid rgb(120, 180, 205);
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    height: 30px;
+    width: 30px;
+}
+
+.details-section .quantity-wrapper button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(120, 180, 205);
+}
+
+.details-section .quantity-wrapper input {
+    border: .5px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+    width: 55px;
+}
+
+.details-section .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.details-section .actions a {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 20px;
+    margin-top: 25px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.details-section .actions .add-to-cart {
+    background-color: rgb(255, 255, 255);
+    border: 1.5px solid rgb(120, 180, 205);
+    color: rgb(120, 180, 205);
+}
+
+.details-section .actions .buy-now {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+}
+
+.details-section .actions .add-to-cart:hover,
+.details-section .actions .buy-now:hover {
+    transform: translateY(-10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.details-section .options select {
+    appearance: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    flex: none;
+    font-size: 15px;
+    margin-right: 225px;
+    padding: 10px;
+    width: 150px;
+}
+
+.toast {
+    background-color: rgb(120, 180, 205);
+    border-radius: 5px;
+    bottom: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    opacity: 0;
+    padding: 10px 20px;
+    position: fixed;
+    right: 50px;
+    transform: translateY(25px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    z-index: 1000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.back-button-container {
+    left: 20px;
+    position: fixed;
+    top: 20px;
+    z-index: 1000;
+}
+
+.back-button {
+    align-items: center;
+    border: 1.5px solid rgb(120, 180, 205);
+    border-radius: 10px;
+    color: rgb(120, 180, 205);
+    display: inline-flex;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.back-button i {
+    margin-right: 10px;
+}
+
+.back-button:hover {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+}

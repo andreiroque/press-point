@@ -1,0 +1,479 @@
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    text-decoration: none;
+}
+
+header {
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    height: 125px;
+    justify-content: space-between;
+    padding: 20px 10%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo img {
+    height: auto;
+    max-width: 125px;
+}
+
+.navigationmenu {
+    display: flex;
+}
+
+.navigationmenu a {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px 20px;
+    text-transform: capitalize;
+    transition: all .45s ease;
+}
+
+.navigationmenu a:hover {
+    color: rgb(120, 180, 205);
+}
+
+.navigation-icon {
+    align-items: center;
+    display: flex;
+}
+
+.navigation-icon i {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-weight: 500;
+    margin-right: 25px;
+    transition: all .45s ease;
+}
+
+.navigation-icon i:hover {
+    color: rgb(120, 180, 205);
+    transform: scale(1.1);
+}
+
+#menu-icon {
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 500;
+    z-index: 10000;
+}
+
+section {
+    padding: 5% 10%;
+}
+
+.main-home {
+    align-items: center;
+    background-image: url(product-images/press-point-cover.png);
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    height: 100vh;
+    width: 100%;
+}
+
+.main-text h5 {
+    color: rgb(120, 180, 205);
+    font-size: 25px;
+    font-weight: 550;
+    text-transform: capitalize;
+}
+
+.main-text h1 {
+    color: rgb(0, 0, 0);
+    font-size: 50px;
+    font-weight: 550;
+    line-height: 1.5;
+    margin: 5px 0 10px;
+    text-transform: capitalize;
+}
+
+.main-text p {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.main-button {
+    color: rgb(120, 180, 205);
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 15px 25px;
+    text-transform: capitalize;
+    transition: all .45s ease;
+}
+
+.main-button:hover {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+}
+
+.main-button i {
+    vertical-align: middle;
+}
+
+.down-arrow {
+    position: absolute;
+    right: 10%;
+    top: 85%;
+}
+
+.down-arrow i {
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    color: rgb(120, 180, 205);
+    font-size: 25px;
+    padding: 15px 15px;
+}
+
+.down-arrow i:hover {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+    transition: all .40s ease;
+}
+
+.main-products {
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px 10%;
+    text-align: center;
+}
+
+.main-products .heading {
+    font-size: 50px;
+    margin-bottom: 25px;
+    margin-top: 5rem;
+}
+
+.main-products .wrapper {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+}
+
+.wrapper .box {
+    background: rgb(255, 255, 255);
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 10px;
+    padding: 30px 20px;
+    transition: .5s;
+}
+
+.wrapper .box:hover {
+    transform: scale(1.05);
+}
+
+.box i {
+    color: rgb(120, 180, 205);
+    font-size: 50px;
+}
+
+.box h1 {
+    font-size: 25px;
+}
+
+.box p {
+    line-height: 1.5;
+    margin: 10 0 20px;
+}
+
+.box .explore-button {
+    background: rgb(120, 180, 205);
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    font-weight: 500;
+    margin-top: 25px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.box .explore-button:hover {
+    background: transparent;
+    color: rgb(120, 180, 205);
+}
+
+.product-text h1 {
+    color: rgb(0, 0, 0);
+    font-size: 50px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.product-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.category-head {
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+.category-head ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.category-title {
+    background: rgb(255, 255, 255);
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 10px;
+    color: rgb(120, 180, 205);
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 calc (15% - 10px);
+    font-size: 15px;
+    justify-content: center;
+    margin: 15px 10px;
+    padding: 15px;
+    transition: all 0.45s ease;
+}
+
+.category-title:hover {
+    opacity: 0.5;
+}
+
+.category-title li {
+    padding: 0 10px;
+}
+
+.active {
+    background: rgb(120, 180, 205);
+}
+
+.product-list {
+    display: grid;
+    gap: 1.55rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+}
+
+.row {
+    border: 1.75px solid rgb(120, 180, 205);
+    margin-bottom: 3.25rem;
+    padding: 15px;
+    position: relative;
+    transition: all .40s;
+}
+
+.row img {
+    height: auto;
+    transition: all .40s;
+    width: 100%;
+}
+
+.row img:hover {
+    transform: scale(0.9);
+}
+
+.product-text h5 {
+    background-color: rgb(120, 180, 205);
+    border-radius: 1.5px;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 500;
+    left: 15px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 15px;
+}
+
+.button-icon {
+    background-color: rgb(255, 255, 255);
+    border: 1.75px solid rgb(120, 180, 205);
+    border-radius: 5px;
+    color: rgb(120, 180, 205);
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 1rem;
+    padding: 5px 15px;
+    text-align: center;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.button-icon:hover {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+}
+
+.view-icon,
+.cart-icon {
+    display: inline-block;
+    margin: 5px;
+}
+
+.rating i {
+    color: rgb(120, 180, 205);
+    font-size: 25px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.price h5 {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: 550;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.price p {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.contact {
+    border-top: 2.5px solid rgb(120, 180, 205);
+}
+
+.contact-information {
+    display: grid;
+    gap: 5.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+}
+
+.first-information img {
+    height: auto;
+    width: 150px;
+}
+
+.contact-information h5 {
+    color: rgb(120, 180, 205);
+    font-size: 25px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.contact-information p {
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.contact-information p:hover {
+    color: rgb(120, 180, 205);
+}
+
+.social-icon i {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-right: 10px;
+    transition: all .45s;
+}
+
+.social-icon i:hover {
+    transform: scale(1.5);
+}
+
+@media(max-width:750px) {
+    header {
+        padding: 20px 5%;
+        transition: .45s;
+    }
+}
+
+@media(max-width:625px) {
+    .main-text h1 {
+        font-size: 50px;
+        transition: .45s;
+    }
+
+    .main-text p {
+        font-size: 25px;
+        transition: .45s;
+    }
+
+    .main-button {
+        padding: 10px 20px;
+        transition: .45s;
+    }
+}
+
+
+@media screen and (max-width: 950px) {
+    .main-products {
+        padding: 20px 5%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .main-products .wrapper {
+        grid-template-columns: repeat(auto-fit, minmax (200px, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .filter-dropdown {
+        width: 50%;
+    }
+
+    .filter-button {
+        width: 50%;
+    }
+
+    .filter-button:hover {
+        background-color: rgb(120, 180, 205);
+    }
+
+    .filter-menu {
+        box-shadow: none;
+        margin-top: 10px;
+        position: static;
+        width: 50%;
+    }
+}
+
+@media(max-width:750px) {
+    .navigationmenu {
+        align-items: center;
+        background: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 130vh;
+        padding: 120px 30px;
+        position: absolute;
+        right: -100%;
+        top: 100%;
+        transition: all .45s;
+        width: 300px;
+    }
+
+    .navigationmenu a {
+        display: block;
+        margin: 20px 0;
+    }
+
+    .navigationmenu.open {
+        right: 0;
+    }
+}

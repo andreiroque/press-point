@@ -1,0 +1,256 @@
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+}
+
+header {
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    height: 125px;
+    justify-content: space-between;
+    padding: 20px 10%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo img {
+    height: auto;
+    max-width: 125px;
+}
+
+.navigationmenu {
+    display: flex;
+}
+
+.navigationmenu a {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px 20px;
+    text-transform: capitalize;
+    transition: all .40s ease;
+}
+
+.navigationmenu a:hover {
+    color: rgb(120, 180, 205);
+}
+
+.navigation-icon {
+    align-items: center;
+    display: flex;
+}
+
+.navigation-icon i {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-weight: 500;
+    margin-right: 25px;
+    transition: all .40s ease;
+}
+
+.navigation-icon i:hover {
+    color: rgb(120, 180, 205);
+    transform: scale(1.1);
+}
+
+#menu-icon {
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 500;
+    z-index: 10000;
+}
+
+section {
+    padding: 5% 10%;
+}
+
+.container {
+    background: rgb(255, 255, 255);
+    border: 2.5px solid rgb(120, 180, 205);
+    border-radius: 15px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 850px;
+}
+
+.sign-up-button {
+    background: none;
+    border: 1.5px solid rgb(120, 180, 205);
+    border-radius: 10px;
+    color: rgb(120, 180, 205);
+    font-size: 15px;
+    padding: 10px 12px;
+    position: absolute;
+    right: 20px;
+    text-decoration: none;
+    top: 20px;
+    transition: 0.35s ease, color 0.35s ease;
+}
+
+.sign-up-button:hover {
+    background-color: rgb(120, 180, 205);
+    color: rgb(255, 255, 255);
+}
+
+.left {
+    align-items: center;
+    background: rgb(120, 180, 205);
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.left img {
+    width: 75%;
+}
+
+.right {
+    flex: 1;
+    padding: 50px;
+}
+
+.right h1 {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group label {
+    color: rgb(0, 0, 0);
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 10px;
+    padding-right: 40px;
+    width: 100%;
+}
+
+.form-group input:focus {
+    border-color: rgb(120, 180, 205);
+    outline: none;
+}
+
+.form-group i {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    position: absolute;
+    right: 10px;
+    top: 70%;
+    transform: translateY(-50%);
+}
+
+.actions {
+    color: rgb(0, 0, 0);
+    display: flex;
+    font-size: 15px;
+    justify-content: space-between;
+}
+
+.actions a {
+    color: rgb(120, 180, 205);
+    text-decoration: none;
+}
+
+.sign-in-button {
+    background-color: rgb(120, 180, 205);
+    border: none;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 25px;
+    padding: 15px;
+    width: 100%;
+}
+
+.sign-up-container {
+    font-size: 15px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.sign-up-container a {
+    color: rgb(120, 180, 205);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 850px) {
+    header {
+        padding: 20px 5%;
+        transition: .45s;
+    }
+
+    .navigationmenu {
+        align-items: center;
+        background: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        height: 130vh;
+        padding: 120px 30px;
+        position: absolute;
+        right: -100%;
+        top: 100%;
+        transition: all .45s;
+        width: 300px;
+    }
+
+    .navigationmenu a {
+        display: block;
+        margin: 20px 0;
+    }
+
+    .navigationmenu.open {
+        right: 0;
+    }
+
+    .container {
+        flex-direction: column;
+        margin-top: 300px;
+        width: 95%;
+    }
+
+    .left {
+        padding: 25px;
+    }
+
+    .right {
+        padding: 25px;
+        text-align: left;
+    }
+
+    .left img {
+        width: 50%;
+    }
+
+}
