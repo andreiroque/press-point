@@ -13,21 +13,21 @@ include "connection.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="press-point.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
-        integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="./press-point.css">
     <title>Press Point</title>
 </head>
 
 <body>
     <header>
-        <a href="#home" class="logo"><img src="product-images/press-point-logo.png" alt=""></a>
+        <a href="#home" class="logo"><img src="product-images/press-point-logo.png" alt="image"></a>
         <ul class="navigationmenu">
             <li><a href="#home">Home</a></li>
             <li><a href="#products">Products</a></li>
@@ -133,7 +133,9 @@ include "connection.php";
 
         <div class="product-list">
             <div class="row">
-                <img src="product-images/apex-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/apex-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -154,7 +156,9 @@ include "connection.php";
                 </div>
             </div>
             <div class="row">
-                <img src="product-images/drift-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/drift-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -176,7 +180,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/fusion-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/fusion-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -198,7 +204,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/impulse-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/impulse-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -220,7 +228,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/krypton-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/krypton-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -242,7 +252,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/nexus-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/nexus-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -264,7 +276,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/quarion-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/quarion-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -286,7 +300,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/stratus-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/stratus-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -308,7 +324,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/valor-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/valor-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -330,7 +348,9 @@ include "connection.php";
                 
             </div>
             <div class="row">
-                <img src="product-images/zion-press.png" alt="">
+                <div class="img">
+                    <img src="product-images/zion-press.png" alt="image">
+                </div>
                 <div class="rating">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
