@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 
 include "connection.php";
@@ -148,7 +149,7 @@ include "connection.php";
                     <p>Php 4,500.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -171,7 +172,7 @@ include "connection.php";
                     <p>Php 2,750.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -195,7 +196,7 @@ include "connection.php";
                     <p>Php 3,800.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -219,7 +220,7 @@ include "connection.php";
                     <p>Php 3,200.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -243,7 +244,7 @@ include "connection.php";
                     <p>Php 5,000.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -267,7 +268,7 @@ include "connection.php";
                     <p>Php 2,500.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -291,7 +292,7 @@ include "connection.php";
                     <p>Php 4,200.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -315,7 +316,7 @@ include "connection.php";
                     <p>Php 2,750.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -339,7 +340,7 @@ include "connection.php";
                     <p>Php 4,050.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -363,7 +364,7 @@ include "connection.php";
                     <p>Php 5,500.00</p>
                 </div>
                 <div class="view-icon">
-                    <a href="product-description.html">
+                    <a href="product-description.php">
                         <button class="button-icon">
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
@@ -414,3 +415,5 @@ include "connection.php";
 </body>
 
 </html>
+
+<?php mysqli_close($conn); ?>

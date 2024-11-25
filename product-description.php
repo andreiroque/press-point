@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+  header("Location: sign-in.php");
+}
+
+include "connection.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -117,3 +128,5 @@
     </script>
   </body>
 </html>
+
+<?php mysqli_close($conn); ?>

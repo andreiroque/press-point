@@ -1,3 +1,12 @@
+<?php 
+session_start();
+
+include "connection.php";
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,7 +77,8 @@
         </div>
       </div>
     </div>
-
     <script src="press-point.js"></script>
   </body>
 </html>
+
+<?php mysqli_close($conn); ?>
