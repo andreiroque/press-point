@@ -4,6 +4,9 @@ session_start();
 
 include "connection.php";
 
+if(isset($_SESSION['id'])){
+    echo '<script>console.log("Logged In!")</script>';
+}
 
 ?>
 

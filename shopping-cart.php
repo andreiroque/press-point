@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['id'])){
+    echo '<script>alert("Please Login or Sign Up first!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+}
+
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

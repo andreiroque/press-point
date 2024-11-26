@@ -54,8 +54,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       </ul>
       <div class="navigation-icon">
         <a href="#"><i class="bx bx-search"></i></a>
-        <a href="sign-in.html"><i class="bx bx-user"></i></a>
-        <a href="shopping-cart.html"><i class="bx bx-cart"></i></a>
+        <a href="sign-in.php"><i class="bx bx-user"></i></a>
+        <a href="shopping-cart.php"><i class="bx bx-cart"></i></a>
         <div class="bx bx-menu" id="menu-icon"></div>
       </div>
     </header>
