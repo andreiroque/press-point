@@ -2,6 +2,27 @@
 session_start();
 
 include "connection.php";
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+  $name = $_POST['name'];
+  $email = $_POST['email-address'];
+  $password = $_POST['password'];
+  $role = 'User';
+  $status = 'Active';
+
+  $query = "INSERT INTO user(name, email, password, role, status) VALUES ('$name', '$email', '$password', '$role', '$status')";
+  
+  if(mysqli_query($conn, $query)){
+    echo '<script>alert("Successfully Registered!")</script>';
+    echo '<script>window.location="index.php"</script>';
+  }else{
+    echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
+  }
+
+  
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,22 +67,22 @@ include "connection.php";
         </div>
         <div class="right">
           <h1>Sign Up</h1>
-          <form>
+          <form method="post">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" required />
+              <input type="text" id="name" name="name" required />
             </div>
             <div class="form-group">
               <label for="email-address">Email Address</label>
-              <input type="email" id="email-address" required />
-            </div>
-            <div class="form-group">
-              <label for="confirm-password">Confirm Password</label>
-              <input type="password" id="confirm-password" required />
+              <input type="email" id="email-address" name="email-address" required />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" id="password" required />
+              <input type="password" id="password" name="password" required />
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" />
             </div>
             <div class="actions">
               <label><input type="checkbox" /> Show Password</label>

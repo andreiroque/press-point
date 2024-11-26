@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
     }
   }
-  header("Location: index.php");
+  echo '<script>window.location="index.php"</script>';
 }
 
 ?>
