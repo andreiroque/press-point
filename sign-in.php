@@ -8,12 +8,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $email = $_POST['email-address'];
   $password = $_POST['password'];
   
-  $query = "SELECT * FROM user WHERE email='$email' and password='$password'";
+  $query = "SELECT * FROM users WHERE email='$email' and password='$password'";
   $result = mysqli_query($conn, $query);
   
   if(mysqli_num_rows($result) > 0){
     while ($row = mysqli_fetch_assoc($result)){
-      $_SESSION['id'] = $row['userId'];
+      $_SESSION['id'] = $row['user_id'];
       $_SESSION['role'] = $row['role']; 
       echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
     }
