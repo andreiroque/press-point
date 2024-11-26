@@ -3,6 +3,23 @@ session_start();
 
 include "connection.php";
 
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+  $email = $_POST['email-address'];
+  $password = $_POST['password'];
+  
+  $query = "SELECT * FROM user WHERE email='$email' and password='$password'";
+  $result = mysqli_query($conn, $query);
+  
+  if(mysqli_num_rows($result) > 0){
+    while ($row = mysqli_fetch_assoc($result)){
+      $_SESSION['id'] = $row['userId'];
+      $_SESSION['role'] = $row['role']; 
+      echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
+    }
+  }
+  header("Location: index.php");
+}
 
 ?>
 
@@ -47,15 +64,15 @@ include "connection.php";
       </div>
       <div class="right">
         <h1>Sign In</h1>
-        <form>
+        <form class="form" method="post">
           <div class="form-group">
             <label for="email-address">Email Address</label>
-            <input type="email" id="email-address" required />
+            <input type="email" id="email-address" name="email-address" required />
             <i class="bx bx-user"></i>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" required />
+            <input type="password" id="password" name="password" required />
             <i class="bx bx-lock-alt"></i>
           </div>
           <div class="actions">
