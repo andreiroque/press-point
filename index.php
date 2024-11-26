@@ -155,6 +155,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
             </div>
             <div class="row">
                 <div class="img">
@@ -178,7 +183,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
-                
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
             </div>
             <div class="row">
                 <div class="img">
@@ -201,6 +210,11 @@ include "connection.php";
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
                     </a>
+                </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
                 
             </div>
@@ -226,6 +240,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
                 
             </div>
             <div class="row">
@@ -249,6 +268,11 @@ include "connection.php";
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
                     </a>
+                </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
                 
             </div>
@@ -274,6 +298,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
                 
             </div>
             <div class="row">
@@ -297,6 +326,11 @@ include "connection.php";
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
                     </a>
+                </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
                 
             </div>
@@ -322,6 +356,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
                 
             </div>
             <div class="row">
@@ -346,6 +385,11 @@ include "connection.php";
                         </button>
                     </a>
                 </div>
+                <div class="add-to-cart">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
                 
             </div>
             <div class="row">
@@ -369,6 +413,11 @@ include "connection.php";
                             <i class='bx bx-right-arrow-circle'></i>
                         </button>
                     </a>
+                </div>
+                <div class="add-to-cart" onclick="addCart()">
+                    <button class="button-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
                 
             </div>
