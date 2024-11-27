@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if(!isset($_SESSION['id'])){
+    echo '<script>alert("Please Login or Sign Up first!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+}
+echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,14 +32,14 @@
 
 <body>
 
-    <a href="product-description.html" class="back-button">
+    <a href="product-description.php" class="back-button">
         <button class="previous-button"><i class="bx bx-arrow-back"></i> Back</button>
     </a>
 
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="order-confirmation.html">
+                <form action="order-confirmation.php">
 
                     <div class="row">
                         <div class="col-50">

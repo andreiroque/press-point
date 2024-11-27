@@ -44,9 +44,13 @@ include "connection.php";
     </div>
 
     <?php
+      
       if(isset($_GET['id'])){
         $prodId = $_GET['id'];
-        echo '<script>console.log("'. $prodId .'")</script>';
+        $_SESSION['prod_id'] = $prodId;
+        echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
+      }else if(isset($_SESSION['prod_id'])){
+        $prodId = $_SESSION['prod_id'];
       }else{
         echo '<script>alert("Please choose a product first!")</script>';
         echo '<script>window.location="index.php"</script>';
@@ -73,68 +77,44 @@ include "connection.php";
               <i class="bx bxs-star"></i>
               <p class="price">₱ '. $row1['price'] .'</p>
               <p class="product-information">'. $row1['description'] .'</p>
+              <div class="options">
+                <label for="switch">Switch Type:</label>
+                <select id="switch">
+                  <option value="Clicky">Clicky</option>
+                  <option value="Linear">Linear</option>
+                  <option value="Tactile">Tactile</option>
+                  <option value="Optical">Optical</option>
+                  <option value="Membrane">Membrane</option>
+                </select>
+              </div>
+              <div class="options">
+                <label for="quantity">Quantity:</label>
+                <div class="quantity-wrapper">
+                  <button id="decrease">-</button>
+                  <input type="text" id="quantity" value="1">
+                  <button id="increase">+</button>
+                </div>
+              </div>
+              <div class="actions">
+                <a href="" class="add-to-cart"
+                  ><i class="bx bx-cart"></i> Add to Cart</a
+                >
+                <a href="check-out.php" class="buy-now"
+                  ><i class="bx bx-shopping-bag"></i> Buy Now</a
+                >
+            </div>
             </div>
           </div>
           ';
         }
       }
     ?>
-    <!-- <div class="container">
-      <div class="image-section">
-        <img src="product-images/apex-press.png" />
-      </div>
-
-      <div class="details-section">
-        <h1>Apex Press</h1>
-        <i class="bx bxs-star"></i>
-        <i class="bx bxs-star"></i>
-        <i class="bx bxs-star"></i>
-        <i class="bx bxs-star"></i>
-        <i class="bx bxs-star"></i>
-        <p class="price">5,050.00</p>
-        <p class="product-information">
-          Apex Press features a durable aluminum frame and measures 440 x 140 x
-          40 mm alongside 105 keys that use various switch types for highly
-          customizable performance, has a silent sound profile, and it supports
-          both corded and cordless modes.
-        </p>
-
-        <div class="options">
-          <label for="switch">Switch Type:</label>
-          <select id="switch">
-            <option value="Clicky Switch">Clicky Switch</option>
-            <option value="Hybrid Switch">Hybrid Switch</option>
-            <option value="Membrane Switch">Membrane Switch</option>
-            <option value="Optical Switch">Optical Switch</option>
-            <option value="Tactile Switch">Tactile Switch</option>
-          </select>
-        </div>
-
-        <div class="options">
-          <label for="quantity">Quantity:</label>
-          <div class="quantity-wrapper">
-            <button id="decrease">-</button>
-            <input type="text" id="quantity" value="1" />
-            <button id="increase">+</button>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a href="" class="add-to-cart"
-            ><i class="bx bx-cart"></i> Add to Cart</a
-          >
-          <a href="check-out.html" class="buy-now"
-            ><i class="bx bx-shopping-bag"></i> Buy Now</a
-          >
-        </div>
-      </div>
-    </div> -->
 
     <div id="toast" class="toast hidden">
       <p>The item is now in your cart!</p>
     </div>
 
-    <!-- <script>
+    <script>
       const quantityinput = document.getElementById("quantity");
       const decrease = document.getElementById("decrease");
       const increase = document.getElementById("increase");
@@ -161,7 +141,7 @@ include "connection.php";
           toast.classList.add("hidden");
         }, 5000);
       });
-    </script> -->
+    </script>
   </body>
 </html>
 
