@@ -38,7 +38,7 @@ include "connection.php";
 
   <body>
     <div class="back-button-container">
-      <a href="index.php" class="back-button"
+      <a href="index.php#shop" class="back-button"
         ><i class="fa fa-arrow-left"></i> Back</a
       >
     </div>
@@ -56,8 +56,14 @@ include "connection.php";
         echo '<script>window.location="index.php"</script>';
       }
 
-      $query = "SELECT * FROM products WHERE product_id='$prodId'";
-      $result1 = mysqli_query($conn, $query);
+      $query1 = "SELECT * FROM products WHERE product_id='$prodId'";
+      $result1 = mysqli_query($conn, $query1);
+
+
+      $query2 = "SELECT s.name AS switch_name, pv.stock FROM product_variants pv INNER JOIN switches s ON pv.switch_id = s.switch_id WHERE pv.product_id='$prodId' AND pv.stock > 0";
+
+      $result2 = mysqli_query($conn, $query2);
+      $stock = 0;
 
 
       if(mysqli_num_rows($result1) > 0){
@@ -80,11 +86,14 @@ include "connection.php";
               <div class="options">
                 <label for="switch">Switch Type:</label>
                 <select id="switch">
-                  <option value="Clicky">Clicky</option>
-                  <option value="Linear">Linear</option>
-                  <option value="Tactile">Tactile</option>
-                  <option value="Optical">Optical</option>
-                  <option value="Membrane">Membrane</option>
+                  ';
+                  if(mysqli_num_rows($result2) > 0){
+                    while($row2 = mysqli_fetch_assoc($result2)){
+                      $stock = $row2['stock'];
+                      echo '<option value="'. $row2['switch_name'] .'">'. $row2['switch_name'] .'</option>';
+                    }
+                  }
+                  echo'
                 </select>
               </div>
               <div class="options">
