@@ -85,7 +85,7 @@ include "connection.php";
               <p class="product-information">'. $row1['description'] .'</p>
               <div class="options">
                 <label for="switch">Switch Type:</label>
-                <select id="switch">
+                <select id="switch" onchange="checkSlot(this)" data-product-id="'. $prodId .'">
                   ';
                   if(mysqli_num_rows($result2) > 0){
                     while($row2 = mysqli_fetch_assoc($result2)){
@@ -112,6 +112,8 @@ include "connection.php";
                   ><i class="bx bx-shopping-bag"></i> Buy Now</a
                 >
             </div>
+            <div class="result">
+            </div>
             </div>
           </div>
           ';
@@ -127,6 +129,19 @@ include "connection.php";
       const quantityinput = document.getElementById("quantity");
       const decrease = document.getElementById("decrease");
       const increase = document.getElementById("increase");
+      
+      const checkSlot = (select) => {
+        const productId = select.getAttribute("data-product-id");
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "check-stock.php?product_id="+ productId + "&switch_name=" + select.value, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            document.querySelector(".result").innerHTML = xhr.responseText;
+          }
+        }
+        xhr.send();
+      }
 
       decrease.addEventListener("click", () => {
         let currentValue = parseInt(quantityinput.value) || 1;
