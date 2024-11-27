@@ -43,7 +43,43 @@ include "connection.php";
       >
     </div>
 
-    <div class="container">
+    <?php
+      if(isset($_GET['id'])){
+        $prodId = $_GET['id'];
+        echo '<script>console.log("'. $prodId .'")</script>';
+      }else{
+        echo '<script>alert("Please choose a product first!")</script>';
+        echo '<script>window.location="index.php"</script>';
+      }
+
+      $query = "SELECT * FROM products WHERE product_id='$prodId'";
+      $result1 = mysqli_query($conn, $query);
+
+
+      if(mysqli_num_rows($result1) > 0){
+        while($row1 = mysqli_fetch_assoc($result1)){
+          echo '<script>console.log("'. $row1['picture'] .'")</script>';
+          echo '
+          <div class="container">
+            <div class="image-section">
+              <img src="product-images/'. $row1['picture'] .'" alt="image">
+            </div>
+            <div class="details-section">
+              <h1>'. $row1['name'] .'</h1>
+              <i class="bx bxs-star"></i>
+              <i class="bx bxs-star"></i>
+              <i class="bx bxs-star"></i>
+              <i class="bx bxs-star"></i>
+              <i class="bx bxs-star"></i>
+              <p class="price">₱ '. $row1['price'] .'</p>
+              <p class="product-information">'. $row1['description'] .'</p>
+            </div>
+          </div>
+          ';
+        }
+      }
+    ?>
+    <!-- <div class="container">
       <div class="image-section">
         <img src="product-images/apex-press.png" />
       </div>
@@ -92,13 +128,13 @@ include "connection.php";
           >
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div id="toast" class="toast hidden">
       <p>The item is now in your cart!</p>
     </div>
 
-    <script>
+    <!-- <script>
       const quantityinput = document.getElementById("quantity");
       const decrease = document.getElementById("decrease");
       const increase = document.getElementById("increase");
@@ -125,7 +161,7 @@ include "connection.php";
           toast.classList.add("hidden");
         }, 5000);
       });
-    </script>
+    </script> -->
   </body>
 </html>
 
