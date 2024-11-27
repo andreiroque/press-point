@@ -147,6 +147,11 @@ include "connection.php";
         xhr.send();
       }
 
+      document.addEventListener("DOMContentLoaded", ()=> {
+        const select = document.querySelector("#switch");
+        checkSlot(select);
+      });
+
       decrease.addEventListener("click", () => {
         let currentValue = parseInt(quantityinput.value) || 1;
         if (currentValue > 1) {
