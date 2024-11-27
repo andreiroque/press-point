@@ -136,294 +136,48 @@ if(isset($_SESSION['id'])){
         </div>
 
         <div class="product-list">
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/apex-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Appex Press</h5>
-                    <p>Php 4,500.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/drift-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Drift Press</h5>
-                    <p>Php 2,750.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/fusion-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Fusion Press</h5>
-                    <p>Php 3,800.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/impulse-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Impulse Press</h5>
-                    <p>Php 3,200.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/krypton-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Krypton Press</h5>
-                    <p>Php 5,000.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/nexus-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Nexus Press</h5>
-                    <p>Php 2,500.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/quarion-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Quarion Press</h5>
-                    <p>Php 4,200.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/stratus-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Stratus Press</h5>
-                    <p>Php 2,750.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/valor-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Valor Press</h5>
-                    <p>Php 4,050.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="img">
-                    <img src="product-images/zion-press.png" alt="image">
-                </div>
-                <div class="rating">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <div class="price">
-                    <h5>Zion Press</h5>
-                    <p>Php 5,500.00</p>
-                </div>
-                <div class="view-icon">
-                    <a href="product-description.php">
-                        <button class="button-icon">
-                            <i class='bx bx-right-arrow-circle'></i>
-                        </button>
-                    </a>
-                </div>
-                <div class="add-to-cart" onclick="addCart()">
-                    <button class="button-icon">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>
-                
-            </div>
+            <?php
+
+                $query = "SELECT * FROM products";
+                $result = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        if($row['status'] == "Shown"){
+                            echo '
+                            <div class="row">
+                                <div class="img">
+                                    <img src="product-images/'. $row['picture'] .'" alt="image">
+                                </div>
+                                <div class="rating">
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                    <i class="bx bxs-star"></i>
+                                </div>
+                                <div class="price">
+                                    <h2>'. $row['name'] .'</h2>
+                                    <p><strong>₱</strong> '. $row['price'] .'</p>
+                                </div>
+                                <div class="view-icon">
+                                    <a href="product-description.php?id='. $row['product_id'] .'">
+                                        <button class="button-icon">
+                                            <i class="bx bx-right-arrow-circle"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button class="button-icon">
+                                        <i class="bx bx-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </div>';
+                        }
+                    }
+                }
+
+            ?>
         </div>
     </section>
 
