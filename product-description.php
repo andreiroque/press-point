@@ -104,6 +104,9 @@ include "connection.php";
                   <button id="increase">+</button>
                 </div>
               </div>
+              <div>
+                  <h2 class="result"></h2>
+              </div>
               <div class="actions">
                 <a href="" class="add-to-cart"
                   ><i class="bx bx-cart"></i> Add to Cart</a
@@ -111,8 +114,6 @@ include "connection.php";
                 <a href="check-out.php" class="buy-now"
                   ><i class="bx bx-shopping-bag"></i> Buy Now</a
                 >
-            </div>
-            <div class="result">
             </div>
             </div>
           </div>
@@ -129,15 +130,18 @@ include "connection.php";
       const quantityinput = document.getElementById("quantity");
       const decrease = document.getElementById("decrease");
       const increase = document.getElementById("increase");
+      let maxStock = 1;
       
       const checkSlot = (select) => {
+        quantityinput.value = 1;
         const productId = select.getAttribute("data-product-id");
         const xhr = new XMLHttpRequest();
 
         xhr.open("GET", "check-stock.php?product_id="+ productId + "&switch_name=" + select.value, true);
         xhr.onload = function(){
           if(xhr.readyState == 4 && xhr.status == 200){
-            document.querySelector(".result").innerHTML = xhr.responseText;
+            maxStock = xhr.responseText;
+            document.querySelector(".result").innerHTML = "Available Stock: " + xhr.responseText;
           }
         }
         xhr.send();
@@ -152,7 +156,9 @@ include "connection.php";
 
       increase.addEventListener("click", () => {
         let currentValue = parseInt(quantityinput.value) || 1;
-        quantityinput.value = currentValue + 1;
+        if(currentValue < maxStock){
+          quantityinput.value = currentValue + 1;
+        }
       });
 
       document.querySelector(".add-to-cart").addEventListener("click", (e) => {

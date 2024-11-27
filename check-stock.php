@@ -13,7 +13,7 @@ if(isset($_GET['product_id']) && isset($_GET['switch_name'])){
 
   if(mysqli_num_rows($result) > 0){
     $row = mysqli_fetch_assoc($result);
-    echo "<h1>Available Stock: ". $row['stock'] ."</h1>";
+    echo $row['stock'];
   }
 
 }
