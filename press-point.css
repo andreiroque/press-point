@@ -401,7 +401,7 @@ section {
   position: relative;
 }
 .cart::after {
-  content: "0";
+  content: attr(data-count);
   position: absolute;
   height: 20px;
   width: 10px;

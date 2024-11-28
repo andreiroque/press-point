@@ -34,4 +34,5 @@ if(isset($_GET['product_id']) && isset($_SESSION['id'])){
 }
 
 
+mysqli_close($conn);
 ?>

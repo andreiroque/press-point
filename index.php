@@ -41,7 +41,7 @@ if(isset($_SESSION['id'])){
         <div class="navigation-icon">
             <a href="#"><i class='bx bx-search'></i></a>
             <a href="sign-in.php"><i class='bx bx-user'></i></a>
-            <span class="cart">
+            <span class="cart" data-count="0">
                 <a href="shopping-cart.php"><i class='bx bx-cart'></i></a>
             </span>
             <div class="bx bx-menu" id="menu-icon"></div>
@@ -233,11 +233,31 @@ if(isset($_SESSION['id'])){
             xhr.onload = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     console.log(xhr.responseText);
+                    checkCart();
                     // Implement the icon notification thingy.
                 }
             }
             xhr.send();
         }
+
+        function checkCart() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "checkCart.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log(xhr.responseText);
+                    const cart = document.querySelector(".cart");
+
+                    cart.setAttribute("data-count", xhr.responseText);
+                }
+            }
+            xhr.send();
+        }
+
+        window.addEventListener("DOMContentLoaded", ()=> {
+            checkCart();
+        })
 
     </script>
     <script src="press-point.js"></script>
