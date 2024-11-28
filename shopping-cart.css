@@ -1,125 +1,149 @@
 * {
-    box-sizing: border-box;
-    font-family: "Poppins", serif;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", serif;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  text-decoration: none;
 }
 
 header {
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    height: 125px;
-    justify-content: space-between;
-    padding: 20px 10%;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  height: 125px;
+  justify-content: space-between;
+  padding: 20px 10%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .logo img {
-    height: auto;
-    max-width: 125px;
+  height: auto;
+  max-width: 125px;
 }
 
 .navigationmenu {
-    display: flex;
+  display: flex;
 }
 
 .navigationmenu a {
-    color: rgb(0, 0, 0);
-    font-size: 25px;
-    font-weight: 500;
-    padding: 10px 20px;
-    text-transform: capitalize;
-    transition: all .45s ease;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  font-weight: 500;
+  padding: 10px 20px;
+  text-transform: capitalize;
+  transition: all 0.45s ease;
 }
 
 .navigationmenu a:hover {
-    color: rgb(120, 180, 205);
+  color: rgb(120, 180, 205);
 }
 
 .navigation-icon {
-    align-items: center;
-    display: flex;
+  align-items: center;
+  display: flex;
 }
 
 .navigation-icon i {
-    color: rgb(0, 0, 0);
-    font-size: 25px;
-    font-weight: 500;
-    margin-right: 25px;
-    transition: all .40s ease;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  font-weight: 500;
+  margin-right: 25px;
+  transition: all 0.4s ease;
 }
 
 .navigation-icon i:hover {
-    color: rgb(120, 180, 205);
-    transform: scale(1.1);
+  color: rgb(120, 180, 205);
+  transform: scale(1.1);
 }
 
 #menu-icon {
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    font-size: 25px;
-    font-weight: 500;
-    z-index: 10000;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 500;
+  z-index: 10000;
 }
 
 section {
-    padding: 5% 10%;
+  padding: 5% 10%;
 }
 
 .cart-page {
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    margin: 0 auto;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 table {
-    border-collapse: collapse;
-    width: 75%;
+  border-collapse: collapse;
+  width: 75%;
 }
 
 .cart-information {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 th {
-    background: rgb(120, 180, 205);
-    color: rgb(255, 255, 255);
-    font-size: 25px;
-    font-weight: 500;
-    padding: 5px;
-    text-align: left;
+  background: rgb(120, 180, 205);
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  padding: 5px;
+  text-align: left;
 }
 
 td {
-    padding: 10px 5px;
-    text-align: left;
+  padding: 10px 5px;
+  text-align: left;
 }
 
 td input {
-    height: 25px;
-    padding: 5px;
-    text-align: center;
-    width: 50px;
+  height: 25px;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
 }
 
 td a {
-    color: rgb(120, 180, 205);
-    font-size: 15px;
+  color: rgb(120, 180, 205);
+  font-size: 15px;
 }
 
 td img {
-    height: 150px;
-    margin-right: 10px;
-    width: 150px;
+  height: 150px;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.cart {
+  position: relative;
+}
+.cart::after {
+  content: attr(data-count);
+  position: absolute;
+  height: 20px;
+  width: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  right: 15px;
+  z-index: 1000;
+  padding: 0 5px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: rgb(120, 180, 205);
+  color: white;
+  font-size: 12px;
+  pointer-events: none;
+  font-weight: bold;
 }

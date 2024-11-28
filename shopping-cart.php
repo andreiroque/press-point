@@ -40,8 +40,10 @@ if(!isset($_SESSION['id'])){
 
         <div class="navigation-icon">
             <a href="#"><i class='bx bx-search'></i></a>
-            <a href="sign-in.html"><i class='bx bx-user'></i></a>
-            <a href="#"><i class='bx bx-cart'></i></a>
+            <a href="sign-in.php"><i class='bx bx-user'></i></a>
+            <span class="cart" data-count="0">
+                <a href="shopping-cart.php"><i class='bx bx-cart'></i></a>
+            </span>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
@@ -90,6 +92,19 @@ if(!isset($_SESSION['id'])){
                 ?>
         </table>
     </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", ()=> {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "checkCart.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const cart = document.querySelector(".cart");
+                    cart.setAttribute("data-count", xhr.responseText);
+                }
+            }
+            xhr.send();
+        })
+    </script>
 
 </body>
 
