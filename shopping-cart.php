@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+
+include 'connection.php';
+
 if(!isset($_SESSION['id'])){
     echo '<script>alert("Please Login or Sign Up first!")</script>';
     echo '<script>window.location="sign-in.php"</script>';
@@ -51,53 +54,40 @@ if(!isset($_SESSION['id'])){
                 <th>Summary Total</th>
             </tr>
 
-            <tr>
-                <td>
-                    <div class="cart-information">
-                        <img src="product-images/apex-press.png">
-                        <div>
-                            <p>Apex Press</p>
-                            <p>Php 4,500.00</p>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>Php 4,500.00</td>
-            </tr>
+                <?php
+                    $user_id = $_SESSION['id'];
+                    $query = "SELECT p.name, p.price, p.picture, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
 
-            <tr>
-                <td>
-                    <div class="cart-information">
-                        <img src="product-images/drift-press.png">
-                        <div>
-                            <p>Drift Press</p>
-                            <p>Php 4,500.00</p>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>Php 4,500.00</td>
-            </tr>
+                    $result = mysqli_query($conn, $query);
 
-            <tr>
-                <td>
-                    <div class="cart-information">
-                        <img src="product-images/fusion-press.png">
-                        <div>
-                            <p>Fusion Press</p>
-                            <p>Php 4,500.00</p>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>Php 4,500.00</td>
-            </tr>
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo '
+                                <tr>
+                                    <td>
+                                        <div class="cart-information">
+                                            <img src="product-images/'. $row['picture'] .'">
+                                            <div>
+                                                <p>'. $row['name'] .'</p>
+                                                <p><strong>₱</strong> '. $row['price'] .'</p>
+                                                <br>
+                                                <a href="">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="number" value="'. $row['quantity'] .'"></td>
+                                    <td><strong>₱</strong> '. $row['price'] * $row['quantity'] .'.00</td>
+                                </tr>
+                            ';
+                        }
+                    }else{
+                        echo '
+                        <tr>
+                            <td colspan="3" style="font-size:2rem; text-align: center;" >Nothing in the cart yet :(</td>
+                        </tr>
+                        ';
+                    }
+                ?>
         </table>
     </div>
 

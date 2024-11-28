@@ -168,7 +168,7 @@ if(isset($_SESSION['id'])){
                                     </a>
                                 </div>
                                 <div class="add-to-cart">
-                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'">
+                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'" data-user-id="'. $_SESSION['id'] .'">
                                         <button class="button-icon">
                                             <i class="bx bx-plus-circle"></i>
                                         </button>
@@ -223,6 +223,18 @@ if(isset($_SESSION['id'])){
         
         const addToCart = (anchor) => {
             const product_id = anchor.getAttribute("data-product-id");
+            const user_id = anchor.getAttribute("data-user-id");
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("GET", "addToCart.php?product_id=" + product_id + "&user_id=" + user_id, true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log(xhr.responseText);
+                    // Implement the icon notification thingy.
+                }
+            }
+            xhr.send();
         }
 
     </script>
