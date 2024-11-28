@@ -168,9 +168,11 @@ if(isset($_SESSION['id'])){
                                     </a>
                                 </div>
                                 <div class="add-to-cart">
-                                    <button class="button-icon">
-                                        <i class="bx bx-plus-circle"></i>
-                                    </button>
+                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'">
+                                        <button class="button-icon">
+                                            <i class="bx bx-plus-circle"></i>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>';
                         }
@@ -217,6 +219,13 @@ if(isset($_SESSION['id'])){
             </div>
         </div>
     </section>
+    <script>
+        
+        const addToCart = (anchor) => {
+            const product_id = anchor.getAttribute("data-product-id");
+        }
+
+    </script>
     <script src="press-point.js"></script>
 </body>
 
