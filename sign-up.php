@@ -8,14 +8,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $name = $_POST['name'];
   $email = $_POST['email-address'];
   $password = $_POST['password'];
-  $role = 'User';
-  $status = 'Active';
 
-  $query = "INSERT INTO user(name, email, password, role, status) VALUES ('$name', '$email', '$password', '$role', '$status')";
+  $query = "INSERT INTO users(name, email, password) VALUES ('$name', '$email', '$password')";
   
   if(mysqli_query($conn, $query)){
     echo '<script>alert("Successfully Registered!")</script>';
-    echo '<script>window.location="index.php"</script>';
+    echo '<script>window.location="sign-in.php"</script>';
   }else{
     echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
   }
@@ -55,7 +53,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       <div class="navigation-icon">
         <a href="#"><i class="bx bx-search"></i></a>
         <a href="sign-in.php"><i class="bx bx-user"></i></a>
-        <a href="shopping-cart.php"><i class="bx bx-cart"></i></a>
+        <span class="cart" data-count="0">
+          <a href="shopping-cart.php"><i class="bx bx-cart"></i></a>
+        </span>
         <div class="bx bx-menu" id="menu-icon"></div>
       </div>
     </header>

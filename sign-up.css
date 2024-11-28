@@ -207,6 +207,30 @@ section {
   transition: color 0.3s ease;
 }
 
+.cart {
+  position: relative;
+}
+.cart::after {
+  content: attr(data-count);
+  position: absolute;
+  height: 20px;
+  width: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  right: 15px;
+  z-index: 1000;
+  padding: 0 5px;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: white;
+  background-color: rgb(120, 180, 205);
+  font-size: 12px;
+  pointer-events: none;
+  font-weight: bold;
+}
+
 @media (max-width: 850px) {
   header {
     padding: 20px 5%;

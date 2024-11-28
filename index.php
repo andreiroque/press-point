@@ -221,20 +221,29 @@ if(isset($_SESSION['id'])){
             </div>
         </div>
     </section>
+    <div id="toast" class="toast hidden">
+      <p>The item is now in your cart!</p>
+    </div>
     <script>
         
         const addToCart = (anchor) => {
             const product_id = anchor.getAttribute("data-product-id");
-            const user_id = anchor.getAttribute("data-user-id");
 
             const xhr = new XMLHttpRequest();
 
-            xhr.open("GET", "addToCart.php?product_id=" + product_id + "&user_id=" + user_id, true);
+            xhr.open("GET", "addToCart.php?product_id=" + product_id, true);
             xhr.onload = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     console.log(xhr.responseText);
                     checkCart();
                     // Implement the icon notification thingy.
+                    const toast = document.getElementById("toast");
+                    toast.classList.remove("hidden");
+                    toast.classList.add("show");
+                    setTimeout(() => {
+                    toast.classList.remove("show");
+                    toast.classList.add("hidden");
+                    }, 5000);
                 }
             }
             xhr.send();
