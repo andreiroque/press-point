@@ -83,7 +83,7 @@ if(!isset($_SESSION['id'])){
                     }else{
                         echo '
                         <tr>
-                            <td colspan="3" style="font-size:2rem; text-align: center;" >Nothing in the cart yet :(</td>
+                            <td colspan="3" height="500px" style="font-size:2rem; text-align: center;" >Nothing in the cart yet :(</td>
                         </tr>
                         ';
                     }
