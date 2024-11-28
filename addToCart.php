@@ -1,11 +1,13 @@
 <?php
+session_start();
+
 
 include "connection.php";
 
 
-if(isset($_GET['product_id']) && isset($_GET['user_id'])){
+if(isset($_GET['product_id']) && isset($_SESSION['id'])){
   $product_id = $_GET['product_id'];
-  $user_id = $_GET['user_id'];
+  $user_id = $_SESSION['id'];
   $quantity = 1;
 
   $query = "SELECT p.name, p.price, pv.switch_id, pv.stock FROM product_variants pv INNER JOIN products p ON pv.product_id = p.product_id WHERE pv.product_id=$product_id AND pv.stock > 0";

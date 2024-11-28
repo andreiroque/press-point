@@ -41,7 +41,9 @@ if(isset($_SESSION['id'])){
         <div class="navigation-icon">
             <a href="#"><i class='bx bx-search'></i></a>
             <a href="sign-in.php"><i class='bx bx-user'></i></a>
-            <a href="shopping-cart.php"><i class='bx bx-cart'></i></a>
+            <span class="cart">
+                <a href="shopping-cart.php"><i class='bx bx-cart'></i></a>
+            </span>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </header>
@@ -168,7 +170,7 @@ if(isset($_SESSION['id'])){
                                     </a>
                                 </div>
                                 <div class="add-to-cart">
-                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'" data-user-id="'. $_SESSION['id'] .'">
+                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'">
                                         <button class="button-icon">
                                             <i class="bx bx-plus-circle"></i>
                                         </button>
