@@ -58,7 +58,7 @@ if(!isset($_SESSION['id'])){
 
                 <?php
                     $user_id = $_SESSION['id'];
-                    $query = "SELECT p.name, p.price, p.picture, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
+                    $query = "SELECT c.product_id, p.name, p.price, p.picture, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
                     $result = mysqli_query($conn, $query);
 
@@ -77,8 +77,8 @@ if(!isset($_SESSION['id'])){
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="number" value="'. $row['quantity'] .'"></td>
-                                    <td><strong>₱</strong> '. $row['price'] * $row['quantity'] .'.00</td>
+                                    <td><input type="number" value="'. $row['quantity'] .'" onchange="modifyProdQuantity(this)" data-prod-id="'. $row['product_id'] .'"></td>
+                                    <td class="tSummary"></td>
                                 </tr>
                             ';
                         }
@@ -93,6 +93,44 @@ if(!isset($_SESSION['id'])){
         </table>
     </div>
     <script>
+
+        function checkSummaryTotal (){
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "summaryTotal.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const totals = JSON.parse(xhr.responseText);
+                    document.querySelectorAll("tr").forEach((row) => {
+                        const input = row.querySelector("input[data-prod-id]");
+                        if(input){
+                            const prodId = input.getAttribute("data-prod-id");
+                            const totalCell = row.querySelector(".tSummary");
+                            if(totals[prodId] && totalCell){
+                                const total = totals[prodId];
+                                totalCell.innerHTML = `<strong>₱ ${total.toLocaleString()}.00</strong>`;
+                            }
+                        }
+                    });
+                }
+            }
+            xhr.send();
+        }
+
+        function modifyProdQuantity (input){
+            const prod_id = input.getAttribute("data-prod-id");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "modifyQuantity.php?product_id=" + prod_id + "&quantity=" + input.value, true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log(xhr.responseText);
+                    checkSummaryTotal();
+                }else{
+                    console.error(xhr.responseText);
+                }
+            }
+            xhr.send();
+        }
+
         window.addEventListener("DOMContentLoaded", ()=> {
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "checkCart.php", true);
@@ -103,6 +141,7 @@ if(!isset($_SESSION['id'])){
                 }
             }
             xhr.send();
+            checkSummaryTotal();
         })
     </script>
 
