@@ -100,7 +100,7 @@ include "connection.php";
                 <label for="quantity">Quantity:</label>
                 <div class="quantity-wrapper">
                   <button id="decrease">-</button>
-                  <input type="text" id="quantity" value="1">
+                  <input type="text" id="quantity" value="1" disabled>
                   <button id="increase">+</button>
                 </div>
               </div>

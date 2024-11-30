@@ -93,7 +93,7 @@ if(!isset($_SESSION['id'])){
         </table>
         <table>
             <tr>
-                <td colspan="3" height="150px"style="text-align: right;" class="action">
+                <td colspan="3" height="50px"style="text-align: right;" class="action">
                     <h3 class="grand-total"></h3>
                     <a href="">Check out</a>
                 </td>
@@ -154,7 +154,7 @@ if(!isset($_SESSION['id'])){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     // do something :)
                    const grand_total = JSON.parse(xhr.responseText);
-                   document.querySelector(".grand-total").innerHTML = "Total: ₱" + grand_total;
+                   document.querySelector(".grand-total").innerHTML = grand_total === null ? "" : "Total: ₱ " + grand_total;
                 }
             }
             xhr.send();
