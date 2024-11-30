@@ -6,7 +6,7 @@ include 'connection.php';
 
 if(isset($_SESSION['id'])){
   $user_id = $_SESSION['id'];
-  $query = "SELECT COUNT(*) AS orders FROM cart WHERE cart.user_id ='$user_id'";
+  $query = "SELECT COUNT(*) AS orders FROM cart WHERE cart.user_id ='$user_id' AND cart.status='Added'";
 
   $result = mysqli_query($conn, $query);
 

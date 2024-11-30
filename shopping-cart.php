@@ -48,7 +48,7 @@ if(!isset($_SESSION['id'])){
         </div>
     </header>
 
-    <div class="small-container cart-page">
+    <div class="cart-page">
         <table>
             <tr>
                 <th>Product</th>
@@ -92,6 +92,10 @@ if(!isset($_SESSION['id'])){
                 ?>
         </table>
     </div>
+    <div>
+        <p class="grand-total">Total: 1000.00</p>
+        <button>Checkout</button>
+    </div>
     <script>
 
         function checkSummaryTotal (){
@@ -124,11 +128,27 @@ if(!isset($_SESSION['id'])){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     console.log(xhr.responseText);
                     checkSummaryTotal();
+                    getGrandTotal();
                 }else{
                     console.error(xhr.responseText);
                 }
             }
             xhr.send();
+        }
+
+        function getGrandTotal(){
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET","getCartGrandTotal.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    // do something :)
+                   const grand_total = JSON.parse(xhr.responseText);
+                   document.querySelector(".grand-total").innerHTML = "Total: ₱" + grand_total;
+                }
+            }
+            xhr.send();
+
         }
 
         window.addEventListener("DOMContentLoaded", ()=> {
@@ -142,6 +162,7 @@ if(!isset($_SESSION['id'])){
             }
             xhr.send();
             checkSummaryTotal();
+            getGrandTotal();
         })
     </script>
 

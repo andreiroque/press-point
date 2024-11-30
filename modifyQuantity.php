@@ -10,7 +10,12 @@ if(isset($_GET['product_id'])  && isset($_SESSION['id']) && isset($_GET['quantit
   $user_id = $_SESSION['id'];
   $quantity = $_GET['quantity'];
 
-  $query = "UPDATE cart SET quantity='$quantity' WHERE user_id='$user_id' AND product_id='$product_id'";
+  if($quantity < 1){
+    $query = "UPDATE cart SET status = 'Removed', quantity='$quantity' WHERE user_id='$user_id' AND product_id='$product_id'";
+  }else{
+    $query = "UPDATE cart SET quantity='$quantity' WHERE user_id='$user_id' AND product_id='$product_id'";
+  }
+
 
   if(mysqli_query($conn, $query)){
     echo "Quantity updated Successfully!";

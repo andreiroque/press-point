@@ -6,7 +6,7 @@ include 'connection.php';
 
 $user_id = $_SESSION['id'];
 
-$query = "SELECT p.product_id, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE user_id='$user_id'";
+$query = "SELECT p.product_id, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
 $result = mysqli_query($conn, $query);
 
