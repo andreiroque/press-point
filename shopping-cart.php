@@ -73,7 +73,7 @@ if(!isset($_SESSION['id'])){
                                                 <p>'. $row['name'] .'</p>
                                                 <p><strong>₱</strong> '. $row['price'] .'</p>
                                                 <br>
-                                                <a href="">Remove</a>
+                                                <a onclick="removeItemFromCart(this)" data-product-id="'. $row['product_id'] .'">Remove</a>
                                             </div>
                                         </div>
                                     </td>
@@ -91,12 +91,22 @@ if(!isset($_SESSION['id'])){
                     }
                 ?>
         </table>
-    </div>
-    <div>
-        <p class="grand-total">Total: 1000.00</p>
-        <button>Checkout</button>
+        <table>
+            <tr>
+                <td colspan="3" height="150px"style="text-align: right;" class="action">
+                    <h3 class="grand-total"></h3>
+                    <a href="">Check out</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+        </div>
     </div>
     <script>
+
+        function removeItemFromCart (anchor){
+            console.log(anchor.getAttribute("data-product-id"));
+        }
 
         function checkSummaryTotal (){
             const xhr = new XMLHttpRequest();

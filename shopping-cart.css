@@ -75,11 +75,16 @@ section {
 }
 
 .cart-page {
-  align-items: center;
-  display: flex;
   height: 100vh;
+  display: flex;
   justify-content: center;
-  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  --webkit-display: flex;
+  --webkit-justify-content: center;
+  --webkit-align-items: center;
+  /* margin: 0 auto; */
+  --webkit-flex-direction: column;
 }
 
 table {
@@ -114,6 +119,7 @@ td input {
 }
 
 td a {
+  cursor: pointer;
   color: rgb(120, 180, 205);
   font-size: 15px;
 }
@@ -146,4 +152,18 @@ td img {
   font-size: 12px;
   pointer-events: none;
   font-weight: bold;
+}
+.action h3 {
+  margin-bottom: 20px;
+}
+.action a {
+  border: 1px solid rgb(120, 180, 205);
+  border-radius: 4px;
+  padding: 10px;
+  transition: all 0.45s ease;
+}
+
+.action a:hover {
+  background-color: rgb(120, 180, 205);
+  color: white;
 }
