@@ -12,13 +12,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $result = mysqli_query($conn, $query);
   
   if(mysqli_num_rows($result) > 0){
-    while ($row = mysqli_fetch_assoc($result)){
-      $_SESSION['id'] = $row['user_id'];
-      $_SESSION['role'] = $row['role']; 
-      echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
-    }
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['id'] = $row['user_id'];
+    $_SESSION['role'] = $row['role']; 
+    echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
+    echo '<script>window.location="index.php"</script>';
+  }else{
+    echo '<script>alert("Wrong email or password, please try again!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
   }
-  echo '<script>window.location="index.php"</script>';
 }
 
 ?>
