@@ -139,6 +139,7 @@ if(!isset($_SESSION['id'])){
                     console.log(xhr.responseText);
                     checkSummaryTotal();
                     getGrandTotal();
+                    getCartNotif();
                 }else{
                     console.error(xhr.responseText);
                 }
@@ -161,7 +162,7 @@ if(!isset($_SESSION['id'])){
 
         }
 
-        window.addEventListener("DOMContentLoaded", ()=> {
+        function getCartNotif(){
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "checkCart.php", true);
             xhr.onload = function(){
@@ -171,6 +172,10 @@ if(!isset($_SESSION['id'])){
                 }
             }
             xhr.send();
+        }
+
+        window.addEventListener("DOMContentLoaded", ()=> {
+            getCartNotif();
             checkSummaryTotal();
             getGrandTotal();
         })
