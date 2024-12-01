@@ -105,7 +105,23 @@ if(!isset($_SESSION['id'])){
     <script>
 
         function removeItemFromCart (anchor){
-            console.log(anchor.getAttribute("data-product-id"));
+            const product_id = anchor.getAttribute("data-product-id"); 
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "removeItemFromCart.php?product_id=" + product_id, true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if(response.message == "Item successfully Removed!"){
+                        // display toast.
+                    }
+                    checkSummaryTotal();
+                    getGrandTotal();
+                    getCartNotif();
+                }
+            }
+            xhr.send();
         }
 
         function checkSummaryTotal (){
@@ -184,3 +200,5 @@ if(!isset($_SESSION['id'])){
 </body>
 
 </html>
+
+<?php mysqli_close($conn);?>

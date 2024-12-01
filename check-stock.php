@@ -19,4 +19,5 @@ if(isset($_GET['product_id']) && isset($_GET['switch_name'])){
 }
 
 
+mysqli_close($conn);
 ?>

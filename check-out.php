@@ -116,3 +116,4 @@ echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
 </body>
 
 </html>
+<?php mysqli_close($conn);?>

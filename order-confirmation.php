@@ -75,3 +75,6 @@ if(!isset($_SESSION['id'])){
     </div>
   </body>
 </html>
+
+
+<?php mysqli_close($conn); ?>
