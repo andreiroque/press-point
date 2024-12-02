@@ -49,11 +49,11 @@ if(isset($_SESSION['id'])){
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="user-dashboard.html"><i class='bx bx-user-circle'></i>
+                    <a href="user-dashboard.php"><i class='bx bx-user-circle'></i>
                         <span>Account Settings</span></a>
                 </li>
                 <li>
-                    <a href="order-history.html" class="active"><i class='bx bx-history' ></i>
+                    <a href="order-history.php" class="active"><i class='bx bx-history' ></i>
                         <span>Order History</span></a>
                 </li>
                 <li>
