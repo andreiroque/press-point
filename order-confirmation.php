@@ -2,6 +2,9 @@
 session_start();
 
 
+include 'connection.php';
+
+
 if(!isset($_SESSION['id'])){
   echo '<script>alert("Please Login or Sign Up first!")</script>';
   echo '<script>window.location="sign-in.php"</script>';
