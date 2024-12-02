@@ -101,13 +101,30 @@ if(!isset($_SESSION['id'])){
         <div class="col-25">
             <div class="container">
                 <h1>Shopping Cart <span class="price" style="color:black"></span></h1>
-                <p><a href="#">Apex Press</a> <span class="price">Php 1,000.00</span></p>
-                <p><a href="#">Drift Press</a> <span class="price">Php 1,000.00</span></p>
-                <p><a href="#">Fusion Press</a> <span class="price">Php 1,000.00</span></p>
-                <p><a href="#">Impulse Press</a> <span class="price">Php 1,000.00</span></p>
-                <p><a href="#">Nexus Press</a> <span class="price">Php 1,000.00</span></p>
-                <hr>
-                <p>Total <span class="price" style="color:black"><b>Php 5,000.00</b></span></p>
+                <?php
+                    if(isset($_SESSION['id'])){
+                        $user_id = $_SESSION['id'];
+
+                        $query = "SELECT p.name AS product_name, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
+
+                        $result = mysqli_query($conn, $query);
+                        if(mysqli_num_rows($result) > 0){
+                            while($row = mysqli_fetch_assoc($result)){
+                                echo '<p><a>'. $row['product_name'] .'</a><span class="price">₱ '. $row['price'] .' ('. $row['quantity'] .')</span></p>';
+                            }
+                        }
+
+                        $query1 = "SELECT SUM(p.price * c.quantity) as total_amount FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
+                        $result1= mysqli_query($conn, $query1);
+
+                        if(mysqli_num_rows($result1) > 0){
+                            $row = mysqli_fetch_assoc($result1);
+                            echo '<hr>';
+                            echo '<p>Total <span class="price" style="color: black;"><b>₱ '. $row['total_amount'] .'</b></span></p>';
+                        }
+
+                    }
+                ?>
             </div>
         </div>
     </div>
