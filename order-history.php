@@ -136,7 +136,9 @@ if(isset($_SESSION['id'])){
             });
 
             confirmbutton.addEventListener('click', () => {
-                window.location.href = 'sign-in.html';
+                <?php unset($_SESSION['id']); ?>
+                alert("Successfully logged Out!")
+                window.location.href = 'sign-in.php';
             });
 
             cancelbutton.addEventListener('click', () => {
