@@ -44,28 +44,28 @@ if(!isset($_SESSION['id'])){
                         <div class="col-50">
                             <h1>Billing Address</h1>
                             <label for="full-name">Full Name</label>
-                            <input type="text" id="full-name" name="firstname">
+                            <input type="text" id="full-name" name="firstname" required>
                             <label for="email">Email Address</label>
-                            <input type="text" id="email" name="email">
+                            <input type="text" id="email" name="email" required>
                             <label for="address">Address</label>
-                            <input type="text" id="address" name="address">
+                            <input type="text" id="address" name="address" required>
                             <label for="city">City</label>
-                            <input type="text" id="city" name="city">
+                            <input type="text" id="city" name="city" required>
 
                             <div class="row">
                                 <div class="col-50">
                                     <label for="state">State</label>
-                                    <input type="text" id="state" name="state">
+                                    <input type="text" id="state" name="state" required>
                                 </div>
                                 <div class="col-50">
                                     <label for="zip">Zip Code</label>
-                                    <input type="text" id="zip" name="zip">
+                                    <input type="text" id="zip" name="zip" required>
                                 </div>
                             </div>
 
                             <h1>Shipping Options</h1>
                             <label>Select Shipping Option</label>
-                            <select id="shipping-method" name="shipping-method">
+                            <select id="shipping-method" name="shipping-method" required>
                                 <option value="custom">Custom Shipping</option>
                                 <option value="express">Express Shipping</option>
                                 <option value="same-day">Same Day Shipping</option>
@@ -75,7 +75,7 @@ if(!isset($_SESSION['id'])){
                         <div class="col-50">
                             <h1>Payment Methods</h1>
                             <label>Select Payment Method</label>
-                            <select id="payment-methods" name="payment">
+                            <select id="payment-methods" name="payment" required>
                                 <option value="credit-debit-card">Credit Card / Debit Card</option>
                                 <option value="mobile-wallet">Mobile Wallet</option>
                                 <option value="online-banking">Online Banking</option>
@@ -84,11 +84,11 @@ if(!isset($_SESSION['id'])){
                             </select>
 
                             <label for="account-number">Account Number</label>
-                            <input type="text" id="account-number" name="account-number">
+                            <input type="text" id="account-number" name="account-number" required>
                             <label for="accountholdername">Account Holder Name</label>
-                            <input type="text" id="accountholder-name" name="account-holdername">
+                            <input type="text" id="accountholder-name" name="account-holdername" required>
                             <label for="account-code">Account Code</label>
-                            <input type="text" id="account-code" name="account-code">
+                            <input type="text" id="account-code" name="account-code" required>
 
                         </div>
 
