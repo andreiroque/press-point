@@ -7,7 +7,6 @@ if(!isset($_SESSION['id'])){
     echo '<script>alert("Please Login or Sign Up first!")</script>';
     echo '<script>window.location="sign-in.php"</script>';
 }
-echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
 
 ?>
 
@@ -101,7 +100,7 @@ echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
 
         <div class="col-25">
             <div class="container">
-                <h1>Shopping Cart <span class="price" style="color:black"><b>5</b></span></h1>
+                <h1>Shopping Cart <span class="price" style="color:black"></span></h1>
                 <p><a href="#">Apex Press</a> <span class="price">Php 1,000.00</span></p>
                 <p><a href="#">Drift Press</a> <span class="price">Php 1,000.00</span></p>
                 <p><a href="#">Fusion Press</a> <span class="price">Php 1,000.00</span></p>
@@ -112,7 +111,24 @@ echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
             </div>
         </div>
     </div>
+    <script>
 
+        const checkCart = () => {
+            const cartItem = document.querySelector(".price");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "checkCart.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    cartItem.innerHTML = "<b>"+ xhr.responseText +"</b>"
+                }
+            }
+            xhr.send();
+        }
+        
+        window.addEventListener("DOMContentLoaded", ()=> {
+            checkCart();
+        })
+    </script>
 </body>
 
 </html>

@@ -95,7 +95,7 @@ if(!isset($_SESSION['id'])){
             <tr>
                 <td colspan="3" height="50px"style="text-align: right;" class="action">
                     <h3 class="grand-total"></h3>
-                    <a href="">Check out</a>
+                    <a href="check-out.php">Check out</a>
                 </td>
             </tr>
         </table>
