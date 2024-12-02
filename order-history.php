@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+
+if(isset($_SESSION['id'])){
+   $user_id = $_SESSION['id'];
+
+   $query = "SELECT name, role FROM users WHERE user_id='$user_id'";
+   $result = mysqli_query($conn, $query);
+   if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+        $role = $row['role'];
+   }
+}else{
+    echo '<script>alert("Please login or sign up first!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,8 +79,8 @@
             <h1><label for="navigation-toggle"><i class='bx bx-menu'></i></label>Dashboard</h1>
             <div class="user-wrapper">
                 <div>
-                    <h5>Andrei Marvin Roque</h5>
-                    <small>User</small>
+                    <h5><?php echo $name ?></h5>
+                    <small><?php echo $role ?></small>
                 </div>
             </div>
         </header>
@@ -74,13 +98,24 @@
                        </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                          <td>01</td>
-                          <td>Apex Press</td>
-                          <td>1</td>
-                          <td>Php 4,500.00</td>
-                          <td>Cancelled Order</td>
-                       </tr>
+                        <?php
+                            $query1 = "SELECT o.order_id, p.name as product_name, c.quantity, p.price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.user_id = o.user_id WHERE c.user_id='$user_id'";
+
+                            $result = mysqli_query($conn, $query1);
+                            if(mysqli_num_rows($result) > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                    echo'
+                                        <tr>
+                                            <td>'. $row['order_id'] .'</td>
+                                            <td>'. $row['product_name'] .'</td>
+                                            <td>'. $row['quantity'] .'</td>
+                                            <td>₱ '. $row['price'] .'</td>
+                                            <td>'. $row['status'] .'</td>
+                                        </tr>
+                                    ';
+                                }
+                            }
+                        ?>
                     </tbody>
                  </table>
             </div>
@@ -119,3 +154,5 @@
 </body>
 
 </html>
+
+<?php mysqli_close($conn); ?>

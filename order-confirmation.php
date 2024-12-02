@@ -88,7 +88,7 @@ if(!isset($_SESSION['id'])){
       </div>
 
       <div class="actions">
-        <a href="/track-order" class="track-order">Order Status</a>
+        <a href="order-history.php" class="track-order">Order Status</a>
         <a href="index.php">Continue Shopping</a>
       </div>
     </div>
