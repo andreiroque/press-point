@@ -3,25 +3,30 @@ session_start();
 
 include "connection.php";
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
+if(isset($_SESSION['id'])){
+  echo '<script>window.location="user-dashboard.php"</script>';
+}else{
+  if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-  $email = $_POST['email-address'];
-  $password = $_POST['password'];
-  
-  $query = "SELECT * FROM users WHERE email='$email' and password='$password'";
-  $result = mysqli_query($conn, $query);
-  
-  if(mysqli_num_rows($result) > 0){
-    $row = mysqli_fetch_assoc($result);
-    $_SESSION['id'] = $row['user_id'];
-    $_SESSION['role'] = $row['role']; 
-    echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
-    echo '<script>window.location="index.php"</script>';
-  }else{
-    echo '<script>alert("Wrong email or password, please try again!")</script>';
-    echo '<script>window.location="sign-in.php"</script>';
+    $email = $_POST['email-address'];
+    $password = $_POST['password'];
+    
+    $query = "SELECT * FROM users WHERE email='$email' and password='$password'";
+    $result = mysqli_query($conn, $query);
+    
+    if(mysqli_num_rows($result) > 0){
+      $row = mysqli_fetch_assoc($result);
+      $_SESSION['id'] = $row['user_id'];
+      $_SESSION['role'] = $row['role']; 
+      echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
+      echo '<script>window.location="index.php"</script>';
+    }else{
+      echo '<script>alert("Wrong email or password, please try again!")</script>';
+      echo '<script>window.location="sign-in.php"</script>';
+    }
   }
 }
+
 
 ?>
 
