@@ -1,3 +1,42 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if(isset($_SESSION['id'])){
+    $user_id = $_SESSION['id'];
+
+    $query = "SELECT * FROM users WHERE user_id='$user_id'";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+        $role = $row['role'];
+        $phone = $row['phone_number'];
+        $address = $row['address'];
+    }
+}else{
+    echo '<script>alert("Please login or sign up first!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+}
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    echo '<script>console.log("Shut the fuck up!")</script>';
+    $full_name = $_POST['fullname'];
+    $phone_no = $_POST['phone_number'];
+    $u_address = $_POST['address'];
+
+    $query1 = "UPDATE users SET name='$full_name', phone_number='$phone_no', address='$u_address' WHERE user_id='$user_id'";
+    if(mysqli_query($conn, $query1)){
+        echo '<script>alert("Successfully updated user information!")</script>';
+    }else{
+        echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,8 +94,8 @@
             <h1><label for="navigation-toggle"><i class='bx bx-menu'></i></label>Dashboard</h1>
             <div class="user-wrapper">
                 <div>
-                    <h5>Andrei Marvin Roque</h5>
-                    <small>User</small>
+                    <h5><?php echo $name; ?></h5>
+                    <small><?php echo $role; ?></small>
                 </div>
             </div>
         </header>
@@ -64,10 +103,10 @@
             <div class="recent-grid">
                 <h1>Account Settings</h1>
                 <div class="form-section">
-                    <form>
-                        <input type="text" placeholder="Full Name" required>
-                        <input type="tel" placeholder="Contact Number" pattern="^[0-9]+$" id="contact-number" required>
-                        <input type="text" placeholder="Address" required>
+                    <form method="post">
+                        <?php echo '<input type="text" placeholder="Full Name" name="fullname" value="'. $row['name'] .'" required></input>';?>
+                        <?php echo '<input type="tel" placeholder="Contact Number" pattern="^[0-9]+$" id="contact-number" name="phone_number" value="'. $phone .'" required>'; ?>
+                        <?php echo '<input type="text" placeholder="Address" name="address" value="'. $address .'"required>';?>
                         <button type="submit">Save Changes</button>
                     </form>
                 </div>
@@ -108,7 +147,7 @@
             });
 
             confirmSignoutButton.addEventListener('click', () => {
-                window.location.href = 'sign-in.html';
+                window.location.href = 'logOut.php';
             });
 
             cancelSignoutButton.addEventListener('click', () => {
@@ -151,3 +190,5 @@
 </body>
 
 </html>
+
+<?php mysqli_close($conn); ?>
