@@ -31,14 +31,14 @@ if(!isset($_SESSION['id'])){
 
 <body>
 
-    <a href="product-description.php" class="back-button">
+    <a href="index.php" class="back-button">
         <button class="previous-button"><i class="bx bx-arrow-back"></i> Back</button>
     </a>
 
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="order-confirmation.php">
+                <form method="post">
 
                     <div class="row">
                         <div class="col-50">
@@ -104,23 +104,24 @@ if(!isset($_SESSION['id'])){
                 <?php
                     if(isset($_SESSION['id'])){
                         $user_id = $_SESSION['id'];
+                        $shipping_fee = 150;
 
-                        $query = "SELECT p.name AS product_name, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
+                        $query = "SELECT p.name AS product_name, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
                         $result = mysqli_query($conn, $query);
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_assoc($result)){
                                 echo '<p><a>'. $row['product_name'] .'</a><span class="price">₱ '. $row['price'] .' ('. $row['quantity'] .')</span></p>';
                             }
+                            echo '<p><a>Shipping Fee</a><span class="price">₱ '. $shipping_fee .'.00</span></p>';
                         }
 
-                        $query1 = "SELECT SUM(p.price * c.quantity) as total_amount FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id'";
-                        $result1= mysqli_query($conn, $query1);
+                        $query1 = "SELECT SUM((p.price * c.quantity)) + $shipping_fee as total_amount FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
-                        if(mysqli_num_rows($result1) > 0){
+                        if($result1 = mysqli_query($conn, $query1)){
                             $row = mysqli_fetch_assoc($result1);
                             echo '<hr>';
-                            echo '<p>Total <span class="price" style="color: black;"><b>₱ '. $row['total_amount'] .'</b></span></p>';
+                            echo '<p class="total-amount" data-total="'. $row['total_amount'] .'">Total <span class="price" style="color: black;"><b>₱ '. $row['total_amount'] .'</b></span></p>';
                         }
 
                     }
@@ -129,6 +130,31 @@ if(!isset($_SESSION['id'])){
         </div>
     </div>
     <script>
+
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            // do something :)
+            checkOut();
+            e.preventDefault();
+        })
+
+        function checkOut(){
+            const total = document.querySelector(".total-amount");
+            const total_amount = total.getAttribute("data-total");
+            console.log(total_amount);
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "checkOutItem.php?total=" + total_amount, true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.status == "success"){
+                        window.location = "order-confirmation.php";
+                    }
+                }
+            }
+            xhr.send();
+        }
 
         const checkCart = () => {
             const cartItem = document.querySelector(".price");
@@ -141,7 +167,7 @@ if(!isset($_SESSION['id'])){
             }
             xhr.send();
         }
-        
+
         window.addEventListener("DOMContentLoaded", ()=> {
             checkCart();
         })
