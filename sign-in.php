@@ -15,6 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $row = mysqli_fetch_assoc($result);
     $_SESSION['id'] = $row['user_id'];
     $_SESSION['role'] = $row['role']; 
+    echo '<script>alert("Successfully logged in!")</script>';
     echo '<script>window.location="index.php"</script>';
   }else{
     echo '<script>alert("Wrong email or password, please try again!")</script>';
