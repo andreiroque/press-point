@@ -10,7 +10,6 @@ if(!isset($_SESSION['id'])){
 
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    echo '<script>console.log("Shut the fuck up!")</script>';
     $user_id = $_SESSION['id'];
     $full_name = $_POST['fullname'];
     $phone_no = $_POST['phone_number'];
@@ -128,7 +127,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             xhr.onload = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     const response = JSON.parse(xhr.responseText);
-                    console.log(response);
+                    // console.log(response);
                     name.innerHTML = response.name;
                     role.innerHTML = response.role;
                     inputName.value = response.name;
