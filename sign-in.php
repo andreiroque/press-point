@@ -3,26 +3,37 @@ session_start();
 
 include "connection.php";
 
-if(isset($_SESSION['id'])){
-  echo '<script>window.location="user-dashboard.php"</script>';
-}else{
-  if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-    $email = $_POST['email-address'];
-    $password = $_POST['password'];
-    
-    $query = "SELECT * FROM users WHERE email='$email' and password='$password'";
-    $result = mysqli_query($conn, $query);
-    
-    if(mysqli_num_rows($result) > 0){
-      $row = mysqli_fetch_assoc($result);
-      $_SESSION['id'] = $row['user_id'];
-      $_SESSION['role'] = $row['role']; 
-      echo '<script>alert("Name: '. $row['name'] . " Role: ". $row['role'] . " Status: ". $row['status'] .'")</script>';
-      echo '<script>window.location="index.php"</script>';
-    }else{
-      echo '<script>alert("Wrong email or password, please try again!")</script>';
-      echo '<script>window.location="sign-in.php"</script>';
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+  $email = $_POST['email-address'];
+  $password = $_POST['password'];
+  
+  $query = "SELECT * FROM users WHERE email='$email' and password='$password'";
+  $result = mysqli_query($conn, $query);
+  
+  if(mysqli_num_rows($result) > 0){
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['id'] = $row['user_id'];
+    $_SESSION['role'] = $row['role']; 
+    echo '<script>window.location="index.php"</script>';
+  }else{
+    echo '<script>alert("Wrong email or password, please try again!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+  }
+}
+
+
+if(isset($_SESSION['id'])){
+  $user_id = $_SESSION['id'];
+  $user_query = "SELECT role FROM users WHERE user_id='$user_id'";
+  $user_result = mysqli_query($conn, $user_query);
+  if(mysqli_num_rows($user_result) > 0){
+    $row = mysqli_fetch_assoc($user_result);
+    echo '<script>console.log("'. $row['role'] .'")</script>';
+    if($row['role'] == "Admin"){
+      echo '<script>window.location="admin-dashboard.php"</script>';
+    }else if($row['role'] == "Customer"){
+      echo '<script>window.location="user-dashboard.php"</script>';
     }
   }
 }
