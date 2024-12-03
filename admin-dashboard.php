@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if(isset($_SESSION['id'])){
+    $user_id = $_SESSION['id'];
+    $query = "SELECT name, role FROM users WHERE user_id='$user_id' AND role='Admin'";
+    $result = mysqli_query($conn, $query);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+        $role = $row['role'];
+    }
+}else{
+    echo '<script>alert("Please login or sign up first!")</script>';
+    echo '<script>window.location="sign-in.php"</script>';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,8 +87,8 @@
             </div>
             <div class="user-wrapper">
                 <div>
-                    <h5>Andrei Marvin Roque</h5>
-                    <small>Admin</small>
+                    <h5><?php echo $name; ?></h5>
+                    <small><?php echo $role; ?></small>
                 </div>
             </div>
         </header>
