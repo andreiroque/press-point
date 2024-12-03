@@ -11,6 +11,7 @@ if(!isset($_SESSION['id'])){
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     echo '<script>console.log("Shut the fuck up!")</script>';
+    $user_id = $_SESSION['id'];
     $full_name = $_POST['fullname'];
     $phone_no = $_POST['phone_number'];
     $u_address = $_POST['address'];
