@@ -3,19 +3,7 @@ session_start();
 
 include 'connection.php';
 
-if(isset($_SESSION['id'])){
-    $user_id = $_SESSION['id'];
-
-    $query = "SELECT * FROM users WHERE user_id='$user_id'";
-    $result = mysqli_query($conn, $query);
-    if(mysqli_num_rows($result) > 0){
-        $row = mysqli_fetch_assoc($result);
-        $name = $row['name'];
-        $role = $row['role'];
-        $phone = $row['phone_number'];
-        $address = $row['address'];
-    }
-}else{
+if(!isset($_SESSION['id'])){
     echo '<script>alert("Please login or sign up first!")</script>';
     echo '<script>window.location="sign-in.php"</script>';
 }
@@ -94,8 +82,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <h1><label for="navigation-toggle"><i class='bx bx-menu'></i></label>Dashboard</h1>
             <div class="user-wrapper">
                 <div>
-                    <h5><?php echo $name; ?></h5>
-                    <small><?php echo $role; ?></small>
+                    <h5 class="name"></h5>
+                    <small class="role"></small>
                 </div>
             </div>
         </header>
@@ -104,9 +92,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <h1>Account Settings</h1>
                 <div class="form-section">
                     <form method="post">
-                        <?php echo '<input type="text" placeholder="Full Name" name="fullname" value="'. $row['name'] .'" required></input>';?>
-                        <?php echo '<input type="tel" placeholder="Contact Number" pattern="^[0-9]+$" id="contact-number" name="phone_number" value="'. $phone .'" required>'; ?>
-                        <?php echo '<input type="text" placeholder="Address" name="address" value="'. $address .'"required>';?>
+                        <input class="input_name" type="text" placeholder="Full Name" name="fullname" required>
+                        <input class="input_number" type="tel" placeholder="Contact Number" pattern="^[0-9]+$" id="contact-number" name="phone_number" required>
+                        <input class="input_address" type="text" placeholder="Address" name="address" required>
                         <button type="submit">Save Changes</button>
                     </form>
                 </div>
@@ -128,6 +116,28 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     </div>
 
     <script>
+        function getUserInfo (){
+            const name = document.querySelector(".name");
+            const role = document.querySelector(".role");
+            const inputName = document.querySelector(".input_name");
+            const inputNumber = document.querySelector(".input_number");
+            const inputAddress = document.querySelector(".input_address");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "getUserInfo.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    name.innerHTML = response.name;
+                    role.innerHTML = response.role;
+                    inputName.value = response.name;
+                    inputNumber.value = response.phone_number;
+                    inputAddress.value = response.address;
+                }
+            }
+            xhr.send();
+        }
+        
         document.addEventListener('DOMContentLoaded', () => {
             const signoutButton = document.getElementById('signout-button');
             const signoutAlert = document.getElementById('signout-alert');
@@ -181,6 +191,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 saveAlert.classList.remove('show');
                 saveBackground.classList.remove('show');
             });
+            getUserInfo();
+
         });
         document.getElementById('contact-number').addEventListener('input', function (e) {
             this.value = this.value.replace(/[^0-9]/g, '');
