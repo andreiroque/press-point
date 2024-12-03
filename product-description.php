@@ -48,7 +48,6 @@ include "connection.php";
       if(isset($_GET['id'])){
         $prodId = $_GET['id'];
         $_SESSION['prod_id'] = $prodId;
-        echo '<script>console.log("'. $_SESSION['prod_id'] .'")</script>';
       }else if(isset($_SESSION['prod_id'])){
         $prodId = $_SESSION['prod_id'];
       }else{
@@ -68,7 +67,6 @@ include "connection.php";
 
       if(mysqli_num_rows($result1) > 0){
         while($row1 = mysqli_fetch_assoc($result1)){
-          echo '<script>console.log("'. $row1['picture'] .'")</script>';
           echo '
           <div class="container">
             <div class="image-section">
