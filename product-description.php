@@ -166,13 +166,29 @@ include "connection.php";
 
       document.querySelector(".add-to-cart").addEventListener("click", (e) => {
         e.preventDefault();
-        const toast = document.getElementById("toast");
-        toast.classList.remove("hidden");
-        toast.classList.add("show");
-        setTimeout(() => {
-          toast.classList.remove("show");
-          toast.classList.add("hidden");
-        }, 5000);
+        const switch_name = document.querySelector("#switch");
+        const product_id = switch_name.getAttribute("data-product-id");
+        const quantity = document.querySelector("#quantity");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "add-to-cart-p-d.php?product_id=" + product_id + "&switch_name=" + switch_name.value + "&quantity=" + quantity.value, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            if(response.status == "success"){
+              const toast = document.getElementById("toast");
+              toast.classList.remove("hidden");
+              toast.classList.add("show");
+              setTimeout(() => {
+                toast.classList.remove("show");
+                toast.classList.add("hidden");
+              }, 5000);
+              
+            }
+          }
+        }
+        xhr.send();
+
       });
     </script>
   </body>
