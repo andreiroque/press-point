@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+include 'connection.php';
+
+if(isset($_SESSION['id'])){
+  $user_id = $_SESSION['id'];
+  
+  $query = "SELECT name, role FROM users WHERE user_id='$user_id'";
+  $result = mysqli_query($conn, $query);
+  if(mysqli_num_rows($result) > 0){
+    $row = mysqli_fetch_assoc($result);
+    $name = $row['name'];
+    $role = $row['role'];
+    if($role != "Admin"){
+      echo '<script>alert("You do not have permission to view this page.")</script>';
+      echo '<script>window.location="index.php"</script>';
+    }
+  }
+}else{
+  echo '<script>alert("Please login or sign up first!")</script>';
+  echo '<script>window.location="index.php"</script>';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -289,3 +315,5 @@
     </script>
   </body>
 </html>
+
+<?php mysqli_close($conn); ?>
