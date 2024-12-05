@@ -11,6 +11,7 @@ if(isset($_SESSION['id']) && isset($_GET['total'])){
   $query = "INSERT INTO orders(user_id, total_price) VALUES ('$user_id', '$total_amount')";
   if(mysqli_query($conn, $query)){
     $order_id = mysqli_insert_id($conn);
+    $_SESSION['order_id'] = $order_id;  
 
     $query1 = "UPDATE cart SET status='Checked Out' WHERE user_id='$user_id' AND state='New'";
     if(mysqli_query($conn, $query1)){
@@ -28,9 +29,15 @@ if(isset($_SESSION['id']) && isset($_GET['total'])){
             $query4 = "UPDATE product_variants SET stock = stock - $quantity WHERE product_id ='$product_id' AND switch_id='$switch_id' AND stock >= $quantity";
 
             if(mysqli_query($conn, $query4)){
-                $query5 = "UPDATE cart SET state='Old' WHERE user_id='$user_id' AND state='New' AND status='Checked Out'";
-                if(!mysqli_query($conn, $query5)){
-                    echo json_encode(["status" => "error", "message" => "Failed to update state of cart: " . mysqli_error($conn)]);
+                $query5 = "UPDATE cart SET order_id='$order_id' WHERE user_id='$user_id' AND state='New' AND status='Checked Out'";
+                if(mysqli_query($conn, $query5)){
+                  $query6 = "UPDATE cart SET state='Old' WHERE user_id='$user_id' AND state='New' AND status='Checked Out'";
+                  //Update the order_id in the cart table in the database.
+                  if(!mysqli_query($conn, $query6)){
+                    echo json_encode(["status" => "error", "message" => "Failed to update cart order_id"]);
+                  }
+                }else{
+                  echo json_encode(["status" => "error", "message" => "Failed to update state of cart: " . mysqli_error($conn)]);
                 }
             }else{
                 echo json_encode(["status" => "error", "message" => "Failed to update stock: " . mysqli_error($conn)]);

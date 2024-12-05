@@ -99,7 +99,7 @@ if(isset($_SESSION['id'])){
                     </thead>
                     <tbody>
                         <?php
-                            $query1 = "SELECT o.order_id, p.name as product_name, c.quantity, p.price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.user_id = o.user_id WHERE c.user_id='$user_id' AND c.status='Checked Out'";
+                            $query1 = "SELECT DISTINCT o.order_id, p.name as product_name, c.quantity, p.price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.order_id = o.order_id WHERE c.user_id='$user_id' AND c.status='Checked Out'";
 
                             $result = mysqli_query($conn, $query1);
                             if(mysqli_num_rows($result) > 0){

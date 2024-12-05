@@ -55,16 +55,17 @@ if(!isset($_SESSION['id'])){
         <h1>Order Summary</h1>
         <?php
 
-          if(isset($_SESSION['id'])){
+          if(isset($_SESSION['id']) && isset($_SESSION['order_id'])){
             $user_id = $_SESSION['id'];
-            
-            $query = "SELECT o.order_id, p.name as product_name, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.user_id = o.user_id WHERE c.user_id='$user_id'";
+            $order_id = $_SESSION['order_id'];
+
+            $query = "SELECT DISTINCT p.name as product_name, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.user_id = o.user_id WHERE c.user_id='$user_id' AND c.order_id='$order_id'";
             $result = mysqli_query($conn, $query);
             if(mysqli_num_rows($result) > 0){
               while($row = mysqli_fetch_assoc($result)){
                 echo '
                   <p>
-                    <strong>Order ID:</strong><span class="information">'. $row['order_id'] .'</span>
+                    <strong>Order ID:</strong><span class="information">'. $order_id .'</span>
                   </p>
                   <p>
                     <strong>Item Name:</strong><span class="information">'. $row['product_name'] .'</span>
