@@ -32,7 +32,6 @@ if(isset($_SESSION['id']) && isset($_GET['total'])){
                 $query5 = "UPDATE cart SET order_id='$order_id' WHERE user_id='$user_id' AND state='New' AND status='Checked Out'";
                 if(mysqli_query($conn, $query5)){
                   $query6 = "UPDATE cart SET state='Old' WHERE user_id='$user_id' AND state='New' AND status='Checked Out'";
-                  //Update the order_id in the cart table in the database.
                   if(!mysqli_query($conn, $query6)){
                     echo json_encode(["status" => "error", "message" => "Failed to update cart order_id"]);
                   }
