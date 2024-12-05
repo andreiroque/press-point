@@ -33,22 +33,22 @@
       <div class="sidebar-menu">
         <ul>
           <li>
-            <a href="admin-dashboard.html"
+            <a href="admin-dashboard.php"
               ><i class="bx bx-desktop"></i> <span>Dashboard</span></a
             >
           </li>
           <li>
-            <a href="inventory.html" class="active"
+            <a href="inventory.php" class="active"
               ><i class="bx bx-clipboard"></i> <span>Inventory</span></a
             >
           </li>
           <li>
-            <a href="orders.html"
+            <a href="orders.php"
               ><i class="bx bx-shopping-bag"></i> <span>Orders</span></a
             >
           </li>
           <li>
-            <a href="products.html"
+            <a href="products.php"
               ><i class="bx bx-purchase-tag-alt"></i> <span>Products</span></a
             >
           </li>
@@ -155,7 +155,7 @@
         });
 
         confirmbutton.addEventListener("click", () => {
-          window.location.href = "sign-in.html";
+          window.location.href = "logOut.php";
         });
 
         cancelbutton.addEventListener("click", () => {

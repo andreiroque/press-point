@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="products.css" />
+    <link rel="stylesheet" href="orders.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,22 +33,22 @@
       <div class="sidebar-menu">
         <ul>
           <li>
-            <a href="admin-dashboard.html"
+            <a href="admin-dashboard.php"
               ><i class="bx bx-desktop"></i> <span>Dashboard</span></a
             >
           </li>
           <li>
-            <a href="inventory.html"
+            <a href="inventory.php"
               ><i class="bx bx-clipboard"></i> <span>Inventory</span></a
             >
           </li>
           <li>
-            <a href="orders.html"
+            <a href="orders.php" class="active"
               ><i class="bx bx-shopping-bag"></i> <span>Orders</span></a
             >
           </li>
           <li>
-            <a href="products.html" class="active"
+            <a href="products.php"
               ><i class="bx bx-purchase-tag-alt"></i> <span>Products</span></a
             >
           </li>
@@ -60,7 +60,7 @@
           <div class="background"></div>
           <div class="alert-box" id="signout-alert">
             <div class="icon">
-              <i class="bx bx-help-circle"></i>
+              <i class="bx bx-question-mark"></i>
             </div>
             <p>Are you sure you want to sign out?</p>
             <div class="buttons">
@@ -73,6 +73,7 @@
         </ul>
       </div>
     </div>
+
     <div class="main-content">
       <header>
         <h1>
@@ -92,47 +93,96 @@
       </header>
 
       <main>
-        <div class="recent-grid">
-          <div class="form-section">
-            <form>
-              <input type="text" placeholder="Product Description" required />
-              <input type="file" required />
-              <input type="text" placeholder="Product Name" required />
-              <input
-                type="number"
-                placeholder="Product Price"
-                min="100"
-                required
-              />
-              <button type="submit">Add New Product</button>
-            </form>
+        <div class="cards">
+          <div class="card-single">
+            <div>
+              <h1>10</h1>
+              <span>Total Orders</span>
+            </div>
+            <div>
+              <i class="bx bx-bar-chart-alt"></i>
+            </div>
           </div>
+          <div class="card-single">
+            <div>
+              <h1>50</h1>
+              <span>Pending Orders</span>
+            </div>
+            <div>
+              <i class="bx bx-note"></i>
+            </div>
+          </div>
+          <div class="card-single">
+            <div>
+              <h1>50</h1>
+              <span>Shipped Orders</span>
+            </div>
+            <div>
+              <i class="bx bx-package"></i>
+            </div>
+          </div>
+          <div class="card-single">
+            <div>
+              <h1>50</h1>
+              <span>Delivered Orders</span>
+            </div>
+            <div>
+              <i class="bx bx-door-open"></i>
+            </div>
+          </div>
+          <div class="card-single">
+            <div>
+              <h1>50</h1>
+              <span>Cancelled Orders</span>
+            </div>
+            <div>
+              <i class="bx bx-x-circle"></i>
+            </div>
+          </div>
+        </div>
 
+        <div class="sort-wrapper">
+          <label for="sort-date">Arrange By Date:</label>
+          <select id="sort-date">
+            <option value="latest">Latest to Oldest</option>
+            <option value="oldest">Oldest to Latest</option>
+          </select>
+        </div>
+
+        <div class="recent-grid">
           <table>
             <thead>
               <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
+                <th>Order ID</th>
+                <th>Products</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Date of Purchase</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>
-                  <img
-                    src="product-images/apex-press.png"
-                    class="product-image"
-                  />
-                </td>
-                <td>Apex Press</td>
-                <td>Php 4,500.00</td>
+                <td class="order-id">01</td>
+                <td class="product">Apex Press</td>
+                <td class="quantity">5</td>
+                <td class="status">Delivered Order</td>
+                <td class="purchase-date">November 30, 2024</td>
                 <td>
                   <button class="edit-button">
                     <i class="bx bx-edit"></i>
                   </button>
-                  <button class="delete-button">
-                    <i class="bx bx-trash"></i>
+                </td>
+              </tr>
+              <tr>
+                <td class="order-id">02</td>
+                <td class="product">Drift Press</td>
+                <td class="quantity">5</td>
+                <td class="status">Delivered Order</td>
+                <td class="purchase-date">November 30, 2024</td>
+                <td>
+                  <button class="edit-button">
+                    <i class="bx bx-edit"></i>
                   </button>
                 </td>
               </tr>
@@ -141,50 +191,26 @@
         </div>
       </main>
 
-      <div class="modal" id="edit-modal">
+      <div class="edit-modal">
         <div class="modal-content">
-          <form id="edit-product-form">
-            <input
-              type="file"
-              id="edit-product-image"
-              placeholder="Product Image"
-            />
-            <input
-              type="text"
-              id="edit-product-name"
-              placeholder="Product Name"
-            />
-            <input
-              type="number"
-              id="edit-product-price"
-              placeholder="Product Price"
-            />
+          <form id="edit-order-form">
+            <label for="order-status">Order Status:</label>
+            <select id="order-status" name="order-status">
+              <option value="Pending Order">Pending Order</option>
+              <option value="Shipped Order">Shipped Order</option>
+              <option value="Delivered Order">Delivered Order</option>
+              <option value="Cancelled Order">Cancelled Order</option>
+            </select>
             <div class="modal-buttons">
-              <button type="submit">Save Changes</button>
-              <button type="button" id="cancel-edit">Cancel</button>
+              <button type="submit" class="button">Save Changes</button>
+              <button type="button" class="button close-modal">Cancel</button>
             </div>
           </form>
-        </div>
-      </div>
-
-      <div class="modal" id="delete-modal">
-        <div class="modal-content">
-          <h1>Confirm Delete</h1>
-          <p>Are you sure you want to remove this product?</p>
-          <div class="modal-buttons">
-            <button id="confirm-delete">Yes, Delete</button>
-            <button id="cancel-delete">Cancel</button>
-          </div>
         </div>
       </div>
     </div>
 
     <script>
-      document
-        .querySelector('input[type="number"]')
-        .addEventListener("input", function (e) {
-          this.value = this.value.replace(/[^0-9.]/g, "");
-        });
       document.addEventListener("DOMContentLoaded", () => {
         const signoutbutton = document.getElementById("signout-button");
         const alertbox = document.getElementById("signout-alert");
@@ -198,7 +224,7 @@
         });
 
         confirmbutton.addEventListener("click", () => {
-          window.location.href = "sign-in.html";
+          window.location.href = "logOut.php";
         });
 
         cancelbutton.addEventListener("click", () => {
@@ -215,75 +241,48 @@
       document.addEventListener("DOMContentLoaded", () => {
         const editButtons = document.querySelectorAll(".edit-button");
         const deleteButtons = document.querySelectorAll(".delete-button");
-        const editModal = document.getElementById("edit-modal");
-        const deleteModal = document.getElementById("delete-modal");
-        const cancelEdit = document.getElementById("cancel-edit");
-        const cancelDelete = document.getElementById("cancel-delete");
-        const confirmDelete = document.getElementById("confirm-delete");
+        const editModal = document.querySelector(".edit-modal");
+        const deleteModal = document.querySelector(".delete-modal");
+        const closeButtons = document.querySelectorAll(".close-modal");
+        const confirmDeleteButton = document.getElementById("confirm-delete");
+        let currentOrderRow = null;
 
         editButtons.forEach((button) => {
-          button.addEventListener("click", () => {
+          button.addEventListener("click", (e) => {
+            currentOrderRow = e.target.closest("tr");
+            const currentStatus =
+              currentOrderRow.querySelector(".status").textContent;
+            document.getElementById("order-status").value = currentStatus;
             editModal.style.display = "flex";
           });
         });
 
-        cancelEdit.addEventListener("click", () => {
-          editModal.style.display = "none";
-        });
-
         deleteButtons.forEach((button) => {
-          button.addEventListener("click", () => {
+          button.addEventListener("click", (e) => {
+            currentOrderRow = e.target.closest("tr");
             deleteModal.style.display = "flex";
           });
         });
 
-        cancelDelete.addEventListener("click", () => {
-          deleteModal.style.display = "none";
-        });
-
-        [editModal, deleteModal].forEach((modal) => {
-          modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-              modal.style.display = "none";
-            }
+        closeButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            editModal.style.display = "none";
+            deleteModal.style.display = "none";
           });
         });
-      });
 
-      function showToast(message, type) {
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        toast.textContent = message;
-
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-          toast.classList.add("show");
-        }, 100);
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          setTimeout(() => {
-            toast.remove();
-          }, 500);
-        }, 5000);
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const saveChangesButton = document.querySelector(
-          '#edit-product-form button[type="submit"]'
-        );
-        const confirmDeleteButton = document.getElementById("confirm-delete");
-
-        saveChangesButton.addEventListener("click", (e) => {
-          e.preventDefault();
-          showToast("Changes Saved Successfully!", "success");
-          document.getElementById("edit-modal").style.display = "none";
-        });
+        document
+          .getElementById("edit-order-form")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newStatus = document.getElementById("order-status").value;
+            currentOrderRow.querySelector(".status").textContent = newStatus;
+            editModal.style.display = "none";
+          });
 
         confirmDeleteButton.addEventListener("click", () => {
-          showToast("Product Deleted Successfully!", "error");
-          document.getElementById("delete-modal").style.display = "none";
+          currentOrderRow.remove();
+          deleteModal.style.display = "none";
         });
       });
     </script>

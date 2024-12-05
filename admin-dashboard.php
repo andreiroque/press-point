@@ -45,19 +45,19 @@ if(isset($_SESSION['id'])){
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="admin-dashboard.html" class="active"><i class='bx bx-desktop'></i>
+                    <a href="admin-dashboard.php" class="active"><i class='bx bx-desktop'></i>
                         <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="inventory.html"><i class='bx bx-clipboard'></i>
+                    <a href="inventory.php"><i class='bx bx-clipboard'></i>
                         <span>Inventory</span></a>
                 </li>
                 <li>
-                    <a href="orders.html"><i class='bx bx-shopping-bag'></i>
+                    <a href="orders.php"><i class='bx bx-shopping-bag'></i>
                         <span>Orders</span></a>
                 </li>
                 <li>
-                    <a href="products.html"><i class='bx bx-purchase-tag-alt'></i>
+                    <a href="products.php"><i class='bx bx-purchase-tag-alt'></i>
                         <span>Products</span></a>
                 </li>
                 <li>
@@ -158,7 +158,7 @@ if(isset($_SESSION['id'])){
             });
 
             confirmbutton.addEventListener('click', () => {
-                window.location.href = 'sign-in.html';
+                window.location.href = 'logOut.php';
             });
 
             cancelbutton.addEventListener('click', () => {
