@@ -111,8 +111,8 @@ if(isset($_SESSION['id'])){
         </div>
         <div class="user-wrapper">
           <div>
-            <h5>Andrei Marvin Roque</h5>
-            <small>Admin</small>
+            <h5><?php echo $name; ?></h5>
+            <small><?php echo $role; ?></small>
           </div>
         </div>
       </header>
