@@ -91,15 +91,14 @@ if(isset($_SESSION['id'])){
                     <thead>
                        <tr>
                           <th>Order ID</th>
-                          <th>Product Name</th>
-                          <th>Quantity</th>
-                          <th>Retail Price</th>
+                          <th>Products</th>
+                          <th>Total Price</th>
                           <th>Status</th>
                        </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $query1 = "SELECT DISTINCT o.order_id, p.name as product_name, c.quantity, p.price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.order_id = o.order_id WHERE c.user_id='$user_id' AND c.status='Checked Out'";
+                            $query1 = "SELECT o.order_id, GROUP_CONCAT(CONCAT(p.name, ' (Qty: ', c.quantity, ')') SEPARATOR ', ') AS product_details, SUM(c.quantity * p.price) + 150 AS total_price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.order_id = o.order_id WHERE c.user_id = '$user_id' AND c.status = 'Checked Out' GROUP BY o.order_id, o.status";
 
                             $result = mysqli_query($conn, $query1);
                             if(mysqli_num_rows($result) > 0){
@@ -107,9 +106,8 @@ if(isset($_SESSION['id'])){
                                     echo'
                                         <tr>
                                             <td>'. $row['order_id'] .'</td>
-                                            <td>'. $row['product_name'] .'</td>
-                                            <td>'. $row['quantity'] .'</td>
-                                            <td>₱ '. $row['price'] .'</td>
+                                            <td>'. $row['product_details'] .'</td>
+                                            <td>₱ '. $row['total_price'] .'</td>
                                             <td>'. $row['status'] .'</td>
                                         </tr>
                                     ';
