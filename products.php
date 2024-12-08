@@ -105,10 +105,10 @@ if(isset($_SESSION['id'])){
           <label for="navigation-toggle"><i class="bx bx-menu"></i></label
           >Dashboard
         </h1>
-        <div class="search-wrapper">
+        <!-- <div class="search-wrapper">
           <input type="search" />
           <i class="bx bx-search"></i>
-        </div>
+        </div> -->
         <div class="user-wrapper">
           <div>
             <h5><?php echo $name; ?></h5>

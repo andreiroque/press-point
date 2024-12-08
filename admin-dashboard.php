@@ -85,10 +85,10 @@ if(isset($_SESSION['id'])){
     <div class="main-content">
         <header>
             <h1><label for="navigation-toggle"><i class='bx bx-menu'></i></label>Dashboard</h1>
-            <div class="search-wrapper">
+            <!-- <div class="search-wrapper">
                 <input type="search" />
                 <i class='bx bx-search'></i>
-            </div>
+            </div> -->
             <div class="user-wrapper">
                 <div>
                     <h5><?php echo $name; ?></h5>
@@ -178,7 +178,7 @@ if(isset($_SESSION['id'])){
                 </table>
             </div>
             <div class="top-selling">
-                <label for="table"><h1>Top Selling products</h1></label>
+                <label for="table"><h1>Top selling products</h1></label>
                 <table>
                     <thead>
                         <tr>
@@ -189,7 +189,7 @@ if(isset($_SESSION['id'])){
                     </thead>
                     <tbody>
                         <?php
-                        $top_selling_query = "SELECT products.picture, products.name as product_name, SUM(quantity) as total_ordered FROM order_items JOIN products ON order_items.product_id = products.product_id GROUP BY product_name ORDER BY total_ordered DESC LIMIT 3";
+                        $top_selling_query = "SELECT products.picture, products.name as product_name, SUM(quantity) as total_ordered FROM order_items JOIN products ON order_items.product_id = products.product_id GROUP BY product_name ORDER BY total_ordered DESC LIMIT 5";
 
                         $top_selling_result = mysqli_query($conn, $top_selling_query);
 

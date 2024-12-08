@@ -104,10 +104,10 @@ if(isset($_SESSION['id'])){
           <label for="navigation-toggle"><i class="bx bx-menu"></i></label
           >Dashboard
         </h1>
-        <div class="search-wrapper">
+        <!-- <div class="search-wrapper">
           <input type="search" />
           <i class="bx bx-search"></i>
-        </div>
+        </div> -->
         <div class="user-wrapper">
           <div>
             <h5><?php echo $name; ?></h5>
@@ -119,13 +119,22 @@ if(isset($_SESSION['id'])){
       <main>
         <div class="recent-grid">
           <div class="form-section">
-            <form>
-              <input type="text" placeholder="Product ID" required />
-              <input type="text" placeholder="Product Name" required />
+            <form id="form">
+              <div class="options">
+                <label for="select">Product Name:</label>
+                <select name="product_name" id="product_name" required></select>
+              </div>
+              <div class="options">
+                <label for="select">Product Variant:</label>
+                <select name="product_variants" id="product_variants" required>
+                </select>
+              </div>
               <input
                 type="number"
                 placeholder="Product Quantity"
                 min="1"
+                name="product_quantity"
+                id="product_quantity"
                 required
               />
               <button type="submit">Add New Stocks</button>
@@ -167,7 +176,6 @@ if(isset($_SESSION['id'])){
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
         const signoutbutton = document.getElementById("signout-button");
         const alertbox = document.getElementById("signout-alert");
         const background = document.querySelector(".background");
@@ -192,6 +200,78 @@ if(isset($_SESSION['id'])){
           alertbox.classList.remove("show");
           background.classList.remove("show");
         });
+
+        function populateProductName(){
+          const productDropdown = document.querySelector("#product_name");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "populateProductName.php", true);
+          xhr.onload = function(){
+            const response = JSON.parse(xhr.responseText);
+            response.forEach((product) => {
+              const option = document.createElement("option");
+              option.value = product.product_id;
+              option.textContent = product.product_name;
+              productDropdown.appendChild(option);
+            });
+          }
+          xhr.send();
+        }
+
+        function populateProductVariant(productId){
+          const switchVariant = document.querySelector("#product_variants");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "populateProductVariant.php?id=" + productId, true);//not quite sure how to handle passing product_id
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              switchVariant.innerHTML = ''
+
+              response.forEach((variant) => {
+                const option = document.createElement("option");
+                option.value = variant.switch_id;
+                option.textContent = variant.switch_variant;
+                switchVariant.appendChild(option);
+              });
+            }
+          }
+          xhr.send();
+        }
+
+        function getProductStocks(){
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getProductStocks.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              console.log(response);
+            }
+          }
+          xhr.send();
+        }
+
+      document.querySelector("#product_name").addEventListener("click", function() {
+        const productId = this.value;
+        if(productId){
+          populateProductVariant(productId);
+        }else{
+          const variantDropdown = document.querySelector("#product_variants");
+          variantDropdown.innerHTML = '';
+        }
+      });
+
+      document.querySelector("#form").addEventListener("submit", (e)=> {
+        e.preventDefault();
+        const productId = document.querySelector("#product_name").value;
+        const switchId = document.querySelector("#product_variants").value;
+        const quantity = document.querySelector("#product_quantity").value;
+
+        console.log("Product ID: " + productId);
+        console.log("Switch ID: " + switchId);
+        console.log("Quantity: " + quantity);
+      })
+
+      document.addEventListener("DOMContentLoaded", () => {
+        populateProductName();
       });
     </script>
   </body>
