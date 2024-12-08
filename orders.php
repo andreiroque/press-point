@@ -139,7 +139,7 @@ if(isset($_SESSION['id'])){
           </div>
           <div class="card-single">
             <div>
-              <h1>50</h1>
+              <h1 class="shippedOrders"></h1>
               <span>Shipped Orders</span>
             </div>
             <div>
@@ -332,9 +332,25 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
+        function getShippedOrders(){
+          const shippedOrders = document.querySelector(".shippedOrders");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getShippedOrders.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              if(response.status == "success"){
+                shippedOrders.innerHTML = response.result;
+              }
+            }
+          }
+          xhr.send();
+        }
+
       document.addEventListener("DOMContentLoaded", () => {
         getTotalOrders();
         getPendingOrders();
+        getShippedOrders();
       });
     </script>
   </body>
