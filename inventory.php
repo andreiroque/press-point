@@ -173,6 +173,7 @@ if(isset($_SESSION['id'])){
           </table>
         </div>
       </main>
+
     </div>
 
     <script>
@@ -249,7 +250,8 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
-      document.querySelector("#product_name").addEventListener("click", function() {
+        
+      document.querySelector("#product_name").addEventListener("change", function() {
         const productId = this.value;
         if(productId){
           populateProductVariant(productId);
@@ -272,6 +274,15 @@ if(isset($_SESSION['id'])){
 
       document.addEventListener("DOMContentLoaded", () => {
         populateProductName();
+        setTimeout(() => {
+          const productId = document.querySelector("#product_name").value;
+          if(productId){
+            populateProductVariant(productId);
+          }else{
+            const variantDropdown = document.querySelector("#product_variants");
+            variantDropdown.innerHTML = '';
+          }
+        }, 100);
       });
     </script>
   </body>
