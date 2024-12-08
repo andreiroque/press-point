@@ -121,7 +121,7 @@ if(isset($_SESSION['id'])){
         <div class="cards">
           <div class="card-single">
             <div>
-              <h1>10</h1>
+              <h1 class="totalOrders"></h1>
               <span>Total Orders</span>
             </div>
             <div>
@@ -130,7 +130,7 @@ if(isset($_SESSION['id'])){
           </div>
           <div class="card-single">
             <div>
-              <h1>50</h1>
+              <h1 class="pendingOrders"></h1>
               <span>Pending Orders</span>
             </div>
             <div>
@@ -236,79 +236,105 @@ if(isset($_SESSION['id'])){
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const signoutbutton = document.getElementById("signout-button");
-        const alertbox = document.getElementById("signout-alert");
-        const background = document.querySelector(".background");
-        const confirmbutton = document.getElementById("confirm-signout");
-        const cancelbutton = document.getElementById("cancel-signout");
+      const signoutbutton = document.getElementById("signout-button");
+      const alertbox = document.getElementById("signout-alert");
+      const background = document.querySelector(".background");
+      const confirmbutton = document.getElementById("confirm-signout");
+      const cancelbutton = document.getElementById("cancel-signout");
 
-        signoutbutton.addEventListener("click", () => {
-          alertbox.classList.add("show");
-          background.classList.add("show");
-        });
+      signoutbutton.addEventListener("click", () => {
+        alertbox.classList.add("show");
+        background.classList.add("show");
+      });
 
-        confirmbutton.addEventListener("click", () => {
-          window.location.href = "logOut.php";
-        });
+      confirmbutton.addEventListener("click", () => {
+        window.location.href = "logOut.php";
+      });
 
-        cancelbutton.addEventListener("click", () => {
-          alertbox.classList.remove("show");
-          background.classList.remove("show");
-        });
+      cancelbutton.addEventListener("click", () => {
+        alertbox.classList.remove("show");
+        background.classList.remove("show");
+      });
 
-        background.addEventListener("click", () => {
-          alertbox.classList.remove("show");
-          background.classList.remove("show");
+      background.addEventListener("click", () => {
+        alertbox.classList.remove("show");
+        background.classList.remove("show");
+      });
+
+      const editButtons = document.querySelectorAll(".edit-button");
+      const deleteButtons = document.querySelectorAll(".delete-button");
+      const editModal = document.querySelector(".edit-modal");
+      const deleteModal = document.querySelector(".delete-modal");
+      const closeButtons = document.querySelectorAll(".close-modal");
+      const confirmDeleteButton = document.getElementById("confirm-delete");
+      let currentOrderRow = null;
+
+      editButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          currentOrderRow = e.target.closest("tr");
+          const currentStatus =
+            currentOrderRow.querySelector(".status").textContent;
+          document.getElementById("order-status").value = currentStatus;
+          editModal.style.display = "flex";
         });
       });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const editButtons = document.querySelectorAll(".edit-button");
-        const deleteButtons = document.querySelectorAll(".delete-button");
-        const editModal = document.querySelector(".edit-modal");
-        const deleteModal = document.querySelector(".delete-modal");
-        const closeButtons = document.querySelectorAll(".close-modal");
-        const confirmDeleteButton = document.getElementById("confirm-delete");
-        let currentOrderRow = null;
-
-        editButtons.forEach((button) => {
-          button.addEventListener("click", (e) => {
-            currentOrderRow = e.target.closest("tr");
-            const currentStatus =
-              currentOrderRow.querySelector(".status").textContent;
-            document.getElementById("order-status").value = currentStatus;
-            editModal.style.display = "flex";
-          });
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          currentOrderRow = e.target.closest("tr");
+          deleteModal.style.display = "flex";
         });
+      });
 
-        deleteButtons.forEach((button) => {
-          button.addEventListener("click", (e) => {
-            currentOrderRow = e.target.closest("tr");
-            deleteModal.style.display = "flex";
-          });
-        });
-
-        closeButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            editModal.style.display = "none";
-            deleteModal.style.display = "none";
-          });
-        });
-
-        document
-          .getElementById("edit-order-form")
-          .addEventListener("submit", (e) => {
-            e.preventDefault();
-            const newStatus = document.getElementById("order-status").value;
-            currentOrderRow.querySelector(".status").textContent = newStatus;
-            editModal.style.display = "none";
-          });
-
-        confirmDeleteButton.addEventListener("click", () => {
-          currentOrderRow.remove();
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          editModal.style.display = "none";
           deleteModal.style.display = "none";
         });
+      });
+
+      document
+        .getElementById("edit-order-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const newStatus = document.getElementById("order-status").value;
+          currentOrderRow.querySelector(".status").textContent = newStatus;
+          editModal.style.display = "none";
+        });
+
+        function getTotalOrders(){
+          const totalOrders = document.querySelector(".totalOrders");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getTotalOrders.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              if(response.status == "success"){
+                totalOrders.innerHTML = response.result;
+              }
+            }
+          }
+          xhr.send();
+        }
+
+        function getPendingOrders(){
+          const pendingOrders = document.querySelector(".pendingOrders");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getPendingOrders.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              if(response.status == "success"){
+                pendingOrders.innerHTML = response.result;
+              }
+            }
+          }
+          xhr.send();
+        }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        getTotalOrders();
+        getPendingOrders();
       });
     </script>
   </body>
