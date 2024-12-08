@@ -137,20 +137,43 @@ if(isset($_SESSION['id'])){
             </div>
 
             <div class="recent-grid">
+                <label for="table"><h1>Recent Orders</h1></label>
                 <table>
                     <thead>
                         <tr>
-                            <th>Product Category</th>
-                            <th>Product Name</th>
-                            <th>Product Sold</th>
+                            <th>Order Id</th>
+                            <th>Customer Name</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="product-category">Linear</td>
-                            <td class="product-name">Apex Press</td>
-                            <td class="product-sold">100</td>
-                        </tr>
+                        <?php
+                            $recent_order_query = "SELECT o.order_id, u.name, o.created_at as order_placed, o.total_price, o.status FROM orders o INNER JOIN users u ON o.user_id = u.user_id ORDER BY o.created_at DESC LIMIT 5;";
+                            $recent_order_result = mysqli_query($conn, $recent_order_query);
+
+                            $date = "";
+                            
+
+                            if(mysqli_num_rows($recent_order_result) > 0){
+                                while($row = mysqli_fetch_assoc($recent_order_result)){
+                                    $date = date_create($row['order_placed']);
+
+                                    $formatted_price = number_format($row['total_price'], 2);
+
+                                    echo '
+                                        <tr>
+                                            <td>'. $row['order_id'] .'</td>
+                                            <td>'. $row['name'] .'</td>
+                                            <td>'. date_format($date, "F j, Y") .'</td>
+                                            <td>₱ '. $formatted_price .'</td>
+                                            <td>'. $row['status'] .'</td>
+                                        </tr>
+                                    ';
+                                }
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -229,7 +252,7 @@ if(isset($_SESSION['id'])){
             xhr.onload = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     const response = JSON.parse(xhr.responseText);
-                    totalRevenue.innerHTML = response.result;
+                    totalRevenue.innerHTML = "₱ " + response.result;
                 }
             }
             xhr.send();
