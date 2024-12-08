@@ -146,6 +146,7 @@ if(isset($_SESSION['id'])){
               <tr>
                 <th>Product ID</th>
                 <th>Product Name</th>
+                <th>Product Variant</th>
                 <th>Product Quantity</th>
                 <th>Product Status</th>
               </tr>
@@ -270,12 +271,39 @@ if(isset($_SESSION['id'])){
                 toast.classList.add("hidden");
                 }, 5000);
                 document.querySelector("#product_quantity").value = "";
+                populateStockTable();
               }
             }
           }
           xhr.send();
         }
         
+        function populateStockTable(){
+          const tableBody = document.querySelector("table tbody");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getProductStocks.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              tableBody.innerHTML = "";
+              response.forEach((data) => {
+                const row = `
+                    <tr>
+                      <td>${data.product_id}</td>
+                      <td>${data.product_name}</td>
+                      <td>${data.switch_name}</td>
+                      <td>${data.stock}</td>
+                      <td>${data.status}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML("beforeend", row);
+              });
+            }
+          }
+          xhr.send();
+        }
+
+
       document.querySelector("#product_name").addEventListener("change", function() {
         const productId = this.value;
         if(productId){
@@ -305,6 +333,7 @@ if(isset($_SESSION['id'])){
             variantDropdown.innerHTML = '';
           }
         }, 100);
+        populateStockTable();
       });
     </script>
   </body>
