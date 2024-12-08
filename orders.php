@@ -179,38 +179,14 @@ if(isset($_SESSION['id'])){
             <thead>
               <tr>
                 <th>Order ID</th>
-                <th>Products</th>
-                <th>Quantity</th>
+                <th>Product Details</th>
+                <th>Total Price</th>
                 <th>Status</th>
                 <th>Date of Purchase</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="order-id">01</td>
-                <td class="product">Apex Press</td>
-                <td class="quantity">5</td>
-                <td class="status">Delivered Order</td>
-                <td class="purchase-date">November 30, 2024</td>
-                <td>
-                  <button class="edit-button">
-                    <i class="bx bx-edit"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="order-id">02</td>
-                <td class="product">Drift Press</td>
-                <td class="quantity">5</td>
-                <td class="status">Delivered Order</td>
-                <td class="purchase-date">November 30, 2024</td>
-                <td>
-                  <button class="edit-button">
-                    <i class="bx bx-edit"></i>
-                  </button>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -221,10 +197,10 @@ if(isset($_SESSION['id'])){
           <form id="edit-order-form">
             <label for="order-status">Order Status:</label>
             <select id="order-status" name="order-status">
-              <option value="Pending Order">Pending Order</option>
-              <option value="Shipped Order">Shipped Order</option>
-              <option value="Delivered Order">Delivered Order</option>
-              <option value="Cancelled Order">Cancelled Order</option>
+              <option value="Pending">Pending</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
             <div class="modal-buttons">
               <button type="submit" class="button">Save Changes</button>
@@ -376,6 +352,41 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
+        function displayOrders(sort){
+          const tableBody = document.querySelector("table tbody");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "displayOrders.php?sort=" + sort, true);
+          xhr.onload = function(){ 
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              tableBody.innerHTML = "";
+              response.forEach((data) => {
+                const row = `
+                        <tr>
+                          <td>${data.order_id}</td>
+                          <td>${data.product_details}</td>
+                          <td>${data.total_price}</td>
+                          <td>${data.status}</td>
+                          <td>${data.created_at}</td>
+                          <td>
+                            <button class="edit-button">
+                              <i class="bx bx-edit"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      `;
+                      tableBody.insertAdjacentHTML("beforeend", row);
+              });
+            }
+          }
+          xhr.send();
+        }
+
+        const sort = document.querySelector("#sort-date");
+        sort.addEventListener("change", ()=>{
+          displayOrders(sort.value);
+        })
+
 
       document.addEventListener("DOMContentLoaded", () => {
         getTotalOrders();
@@ -383,6 +394,9 @@ if(isset($_SESSION['id'])){
         getShippedOrders();
         getDeliveredOrders();
         getCancelledOrders();
+        setTimeout(() => {
+          displayOrders(sort.value);
+        }, 100);
       });
     </script>
   </body>
