@@ -173,7 +173,10 @@ if(isset($_SESSION['id'])){
           </table>
         </div>
       </main>
-
+      
+      <div id="toast" class="toast hidden">
+        <p class="message"></p>
+      </div>
     </div>
 
     <script>
@@ -250,6 +253,28 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
+        function updateStocks(productId,switchId,quantity){
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "updateStocks.php?product_id=" + productId + "&switch_id=" + switchId + "&quantity=" + quantity, true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              if(response.status == "success"){
+                const message = document.querySelector(".message");
+                message.innerHTML = response.message;
+                const toast = document.getElementById("toast");
+                toast.classList.remove("hidden");
+                toast.classList.add("show");
+                setTimeout(() => {
+                toast.classList.remove("show");
+                toast.classList.add("hidden");
+                }, 5000);
+                document.querySelector("#product_quantity").value = "";
+              }
+            }
+          }
+          xhr.send();
+        }
         
       document.querySelector("#product_name").addEventListener("change", function() {
         const productId = this.value;
@@ -266,10 +291,7 @@ if(isset($_SESSION['id'])){
         const productId = document.querySelector("#product_name").value;
         const switchId = document.querySelector("#product_variants").value;
         const quantity = document.querySelector("#product_quantity").value;
-
-        console.log("Product ID: " + productId);
-        console.log("Switch ID: " + switchId);
-        console.log("Quantity: " + quantity);
+        updateStocks(productId,switchId,quantity);
       })
 
       document.addEventListener("DOMContentLoaded", () => {

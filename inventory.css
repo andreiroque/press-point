@@ -413,6 +413,31 @@ tbody td {
   width: 100%;
 }
 
+.toast {
+  background-color: rgb(120, 180, 205);
+  border-radius: 5px;
+  bottom: 50px;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  opacity: 0;
+  padding: 10px 20px;
+  position: fixed;
+  right: 50px;
+  transform: translateY(25px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 @media only screen and (max-width: 1050px) {
   .sidebar {
     width: 75px;
