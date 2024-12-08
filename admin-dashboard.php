@@ -177,6 +177,38 @@ if(isset($_SESSION['id'])){
                     </tbody>
                 </table>
             </div>
+            <div class="top-selling">
+                <label for="table"><h1>Top Selling products</h1></label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Image</th>
+                            <th>Product Name</th>
+                            <th>Total Ordered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $top_selling_query = "SELECT products.picture, products.name as product_name, SUM(quantity) as total_ordered FROM order_items JOIN products ON order_items.product_id = products.product_id GROUP BY product_name ORDER BY total_ordered DESC LIMIT 3";
+
+                        $top_selling_result = mysqli_query($conn, $top_selling_query);
+
+                        if(mysqli_num_rows($top_selling_result) > 0){
+                            while($row = mysqli_fetch_assoc($top_selling_result)){
+                                echo '
+                                    <tr>
+                                        <td><img src="product-images/'.$row['picture'].'" alt="picture"></td>
+                                        <td><h3>'. $row['product_name'] .'</h3></td>
+                                        <td><h3>'. $row['total_ordered'] .'</h3></td>
+                                    </tr>
+                                ';
+                            }
+                        }
+                        
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </main>
     </div>
 
