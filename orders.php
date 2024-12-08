@@ -157,7 +157,7 @@ if(isset($_SESSION['id'])){
           </div>
           <div class="card-single">
             <div>
-              <h1>50</h1>
+              <h1 class="cancelledOrders"></h1>
               <span>Cancelled Orders</span>
             </div>
             <div>
@@ -264,7 +264,6 @@ if(isset($_SESSION['id'])){
       const editButtons = document.querySelectorAll(".edit-button");
       const deleteButtons = document.querySelectorAll(".delete-button");
       const editModal = document.querySelector(".edit-modal");
-      const deleteModal = document.querySelector(".delete-modal");
       const closeButtons = document.querySelectorAll(".close-modal");
       const confirmDeleteButton = document.getElementById("confirm-delete");
       let currentOrderRow = null;
@@ -282,14 +281,12 @@ if(isset($_SESSION['id'])){
       deleteButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
           currentOrderRow = e.target.closest("tr");
-          deleteModal.style.display = "flex";
         });
       });
 
       closeButtons.forEach((button) => {
         button.addEventListener("click", () => {
           editModal.style.display = "none";
-          deleteModal.style.display = "none";
         });
       });
 
@@ -363,12 +360,29 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
+        
+        function getCancelledOrders(){
+          const cancelledOrders = document.querySelector(".cancelledOrders");
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "getCancelledOrders.php", true);
+          xhr.onload = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+              const response = JSON.parse(xhr.responseText);
+              if(response.status == "success"){
+                cancelledOrders.innerHTML = response.result;
+              }
+            }
+          }
+          xhr.send();
+        }
+
 
       document.addEventListener("DOMContentLoaded", () => {
         getTotalOrders();
         getPendingOrders();
         getShippedOrders();
         getDeliveredOrders();
+        getCancelledOrders();
       });
     </script>
   </body>
