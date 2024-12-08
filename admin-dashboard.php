@@ -100,8 +100,8 @@ if(isset($_SESSION['id'])){
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>10</h1>
-                        <span>Product Quantity</span>
+                        <h1 class="total_products">10</h1>
+                        <span>Total Products</span>
                     </div>
                     <div>
                         <i class='bx bx-shopping-bag'></i>
@@ -109,8 +109,8 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>10</h1>
-                        <span>Stock Remaining</span>
+                        <h1 class="total_orders">10</h1>
+                        <span>Total Orders</span>
                     </div>
                     <div>
                         <i class='bx bx-bar-chart-square'></i>
@@ -118,11 +118,20 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>10</h1>
-                        <span>Unit Sold</span>
+                        <h1 class="pending_orders">10</h1>
+                        <span>Pending Orders</span>
                     </div>
                     <div>
                         <i class='bx bx-cart-download'></i>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1 class="revenue">10</h1>
+                        <span>Revenue</span>
+                    </div>
+                    <div>
+                        <i class="bx bx-money"></i>
                     </div>
                 </div>
             </div>
@@ -149,31 +158,46 @@ if(isset($_SESSION['id'])){
     </div>
 
     <script>
+        const signoutbutton = document.getElementById('signout-button');
+        const alertbox = document.getElementById('signout-alert');
+        const background = document.querySelector('.background');
+        const confirmbutton = document.getElementById('confirm-signout');
+        const cancelbutton = document.getElementById('cancel-signout');
+
+        signoutbutton.addEventListener('click', () => {
+            alertbox.classList.add('show');
+            background.classList.add('show');
+        });
+
+        confirmbutton.addEventListener('click', () => {
+            window.location.href = 'logOut.php';
+        });
+
+        cancelbutton.addEventListener('click', () => {
+            alertbox.classList.remove('show');
+            background.classList.remove('show');
+        });
+
+        background.addEventListener('click', () => {
+            alertbox.classList.remove('show');
+            background.classList.remove('show');
+        });
+
+        function getTotalProducts(){
+            const totalProducts = document.querySelector(".total_products");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "getTotalProducts.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    totalProducts.innerHTML = response.result;
+                }
+            }
+            xhr.send();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            const signoutbutton = document.getElementById('signout-button');
-            const alertbox = document.getElementById('signout-alert');
-            const background = document.querySelector('.background');
-            const confirmbutton = document.getElementById('confirm-signout');
-            const cancelbutton = document.getElementById('cancel-signout');
-
-            signoutbutton.addEventListener('click', () => {
-                alertbox.classList.add('show');
-                background.classList.add('show');
-            });
-
-            confirmbutton.addEventListener('click', () => {
-                window.location.href = 'logOut.php';
-            });
-
-            cancelbutton.addEventListener('click', () => {
-                alertbox.classList.remove('show');
-                background.classList.remove('show');
-            });
-
-            background.addEventListener('click', () => {
-                alertbox.classList.remove('show');
-                background.classList.remove('show');
-            });
+            getTotalProducts();
         });
     </script>
 
