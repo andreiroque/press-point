@@ -209,9 +209,23 @@ if(isset($_SESSION['id'])){
             xhr.send();
         }
 
+        function getPendingOrders(){
+            const pendingOrders = document.querySelector(".pending_orders");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "getPendingOrders.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    pendingOrders.innerHTML = response.result;
+                }
+            }
+            xhr.send();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             getTotalProducts();
             getTotalOrders();
+            getPendingOrders();
         });
     </script>
 
