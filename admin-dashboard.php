@@ -100,7 +100,7 @@ if(isset($_SESSION['id'])){
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1 class="total_products">10</h1>
+                        <h1 class="total_products"></h1>
                         <span>Total Products</span>
                     </div>
                     <div>
@@ -109,7 +109,7 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1 class="total_orders">10</h1>
+                        <h1 class="total_orders"></h1>
                         <span>Total Orders</span>
                     </div>
                     <div>
@@ -118,7 +118,7 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1 class="pending_orders">10</h1>
+                        <h1 class="pending_orders"></h1>
                         <span>Pending Orders</span>
                     </div>
                     <div>
@@ -127,7 +127,7 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1 class="revenue">10</h1>
+                        <h1 class="revenue"></h1>
                         <span>Revenue</span>
                     </div>
                     <div>
@@ -196,8 +196,22 @@ if(isset($_SESSION['id'])){
             xhr.send();
         }
 
+        function getTotalOrders(){
+            const totalOrders = document.querySelector(".total_orders");
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "getTotalOrders.php", true);
+            xhr.onload = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    const response = JSON.parse(xhr.responseText);
+                    totalOrders.innerHTML = response.result;
+                }
+            }
+            xhr.send();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             getTotalProducts();
+            getTotalOrders();
         });
     </script>
 
