@@ -98,7 +98,7 @@ if(isset($_SESSION['id'])){
                     </thead>
                     <tbody>
                         <?php
-                            $query1 = "SELECT o.order_id, GROUP_CONCAT(CONCAT(p.name, ' (Qty: ', c.quantity, ')') SEPARATOR ', ') AS product_details, SUM(c.quantity * p.price) + 150 AS total_price, o.status FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.order_id = o.order_id WHERE c.user_id = '$user_id' AND c.status = 'Checked Out' GROUP BY o.order_id, o.status";
+                            $query1 = "SELECT o.order_id, GROUP_CONCAT(CONCAT(p.name, ' (Qty: ', c.quantity, ')') SEPARATOR ', ') AS product_details, SUM(c.quantity * p.price) + 150 AS total_price, o.status, o.created_at FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN orders o ON c.order_id = o.order_id WHERE c.user_id = '$user_id' AND c.status = 'Checked Out' GROUP BY o.order_id, o.status ORDER BY o.created_at DESC;";
 
                             $result = mysqli_query($conn, $query1);
                             if(mysqli_num_rows($result) > 0){

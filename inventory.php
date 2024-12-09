@@ -303,7 +303,6 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
-
       document.querySelector("#product_name").addEventListener("change", function() {
         const productId = this.value;
         if(productId){

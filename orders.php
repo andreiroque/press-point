@@ -237,44 +237,6 @@ if(isset($_SESSION['id'])){
         background.classList.remove("show");
       });
 
-      const editButtons = document.querySelectorAll(".edit-button");
-      const deleteButtons = document.querySelectorAll(".delete-button");
-      const editModal = document.querySelector(".edit-modal");
-      const closeButtons = document.querySelectorAll(".close-modal");
-      const confirmDeleteButton = document.getElementById("confirm-delete");
-      let currentOrderRow = null;
-
-      editButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-          currentOrderRow = e.target.closest("tr");
-          const currentStatus =
-            currentOrderRow.querySelector(".status").textContent;
-          document.getElementById("order-status").value = currentStatus;
-          editModal.style.display = "flex";
-        });
-      });
-
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-          currentOrderRow = e.target.closest("tr");
-        });
-      });
-
-      closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          editModal.style.display = "none";
-        });
-      });
-
-      document
-        .getElementById("edit-order-form")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          const newStatus = document.getElementById("order-status").value;
-          currentOrderRow.querySelector(".status").textContent = newStatus;
-          editModal.style.display = "none";
-        });
-
         function getTotalOrders(){
           const totalOrders = document.querySelector(".totalOrders");
           const xhr = new XMLHttpRequest();
@@ -387,6 +349,28 @@ if(isset($_SESSION['id'])){
           displayOrders(sort.value);
         })
 
+      function updateUserOrder(orderId, status){
+        const editModal = document.querySelector(".edit-modal");
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "updateUserOrder.php?order_id=" + orderId + "&new_status=" + status, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            if(response.status == "success"){
+              console.log(response);
+              getTotalOrders();
+              getPendingOrders();
+              getShippedOrders();
+              getDeliveredOrders();
+              getCancelledOrders();
+              displayOrders(sort.value);
+              editModal.style.display = "none";
+            }
+          }
+        }
+        xhr.send();
+      }
+
 
       document.addEventListener("DOMContentLoaded", () => {
         getTotalOrders();
@@ -397,7 +381,61 @@ if(isset($_SESSION['id'])){
         setTimeout(() => {
           displayOrders(sort.value);
         }, 100);
-      });
+
+        const editButtons = document.querySelectorAll(".edit-button");
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        const editModal = document.querySelector(".edit-modal");
+        const closeButtons = document.querySelectorAll(".close-modal");
+        const confirmDeleteButton = document.getElementById("confirm-delete");
+        let currentOrderRow = null;
+
+        editButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            currentOrderRow = e.target.closest("tr");
+            const currentStatus =
+              currentOrderRow.querySelector(".status").textContent;
+            document.getElementById("order-status").value = currentStatus;
+            editModal.style.display = "flex";
+          });
+        });
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            currentOrderRow = e.target.closest("tr");
+          });
+        });
+
+        closeButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            editModal.style.display = "none";
+          });
+        });
+
+        let orderId = 0;
+        const tableBody = document.querySelector("table tbody");
+        tableBody.addEventListener("click", (event) => {
+          if (event.target.closest(".edit-button")) {
+            const button = event.target.closest(".edit-button");
+            const row = button.closest("tr"); // Access the parent row if needed
+            orderId = row.querySelector("td:first-child").textContent; // Extract order ID
+            // console.log(`Edit button clicked for order ID: ${orderId}`);
+            editModal.style.display = "flex";
+          }
+        });
+
+        document
+          .getElementById("edit-order-form")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+            setTimeout(() => {
+            const newStatus = document.getElementById("order-status").value;
+            updateUserOrder(orderId, newStatus);
+            }, 100);
+          });
+
+
+          
+        });
     </script>
   </body>
 </html>
