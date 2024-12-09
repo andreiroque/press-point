@@ -430,9 +430,8 @@ if(isset($_SESSION['id'])){
         tableBody.addEventListener("click", (event) => {
           if (event.target.closest(".edit-button")) {
             const button = event.target.closest(".edit-button");
-            const row = button.closest("tr"); // Access the parent row if needed
-            orderId = row.querySelector("td:first-child").textContent; // Extract order ID
-            // console.log(`Edit button clicked for order ID: ${orderId}`);
+            const row = button.closest("tr");
+            orderId = row.querySelector("td:first-child").textContent;
             editModal.style.display = "flex";
           }
         });

@@ -172,20 +172,23 @@ if(isset($_SESSION['id'])){
         <div class="modal-content">
           <form id="edit-product-form">
             <input
-              type="file"
-              id="edit-product-image"
-              placeholder="Product Image"
-            />
-            <input
               type="text"
               id="edit-product-name"
               placeholder="Product Name"
+              name="product_name" required
             />
             <input
               type="number"
               id="edit-product-price"
               placeholder="Product Price"
+              name="product_price" required
             />
+            <input
+              type="text"
+              id="description"
+              placeholder="Product Description"
+              name="description" required
+              />
             <div class="modal-buttons">
               <button type="submit">Save Changes</button>
               <button type="button" id="cancel-edit">Cancel</button>
@@ -207,12 +210,7 @@ if(isset($_SESSION['id'])){
     </div>
 
     <script>
-      document
-        .querySelector('input[type="number"]')
-        .addEventListener("input", function (e) {
-          this.value = this.value.replace(/[^0-9.]/g, "");
-        });
-      document.addEventListener("DOMContentLoaded", () => {
+
         const signoutbutton = document.getElementById("signout-button");
         const alertbox = document.getElementById("signout-alert");
         const background = document.querySelector(".background");
@@ -237,45 +235,12 @@ if(isset($_SESSION['id'])){
           alertbox.classList.remove("show");
           background.classList.remove("show");
         });
-      });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const editButtons = document.querySelectorAll(".edit-button");
-        const deleteButtons = document.querySelectorAll(".delete-button");
-        const editModal = document.getElementById("edit-modal");
-        const deleteModal = document.getElementById("delete-modal");
-        const cancelEdit = document.getElementById("cancel-edit");
-        const cancelDelete = document.getElementById("cancel-delete");
-        const confirmDelete = document.getElementById("confirm-delete");
-
-        editButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            editModal.style.display = "flex";
-          });
+      document
+        .querySelector('input[type="number"]')
+        .addEventListener("input", function (e) {
+          this.value = this.value.replace(/[^0-9.]/g, "");
         });
-
-        cancelEdit.addEventListener("click", () => {
-          editModal.style.display = "none";
-        });
-
-        deleteButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            deleteModal.style.display = "flex";
-          });
-        });
-
-        cancelDelete.addEventListener("click", () => {
-          deleteModal.style.display = "none";
-        });
-
-        [editModal, deleteModal].forEach((modal) => {
-          modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-              modal.style.display = "none";
-            }
-          });
-        });
-      });
 
       function showToast(message, type) {
         const toast = document.createElement("div");
@@ -312,30 +277,163 @@ if(isset($_SESSION['id'])){
             console.log(response);
             if(response.status == "success"){
               form.reset();
+              showToast(response.message, "success")
+              populateTable();
             }
           }
         }
         xhr.send(formData);
       }
 
+      function populateTable(){
+        const tableBody = document.querySelector("table tbody");
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "getProducts.php", true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            tableBody.innerHTML = "";
+            response.forEach((data) => {
+              const row = `
+                      <tr>
+                        <td><img class="product-image" src="product-images/${data.picture}" alt="picture"></td>
+                        <td>${data.product_name}</td>
+                        <td>₱ ${data.price}</td>
+                        <td>
+                          <button class="edit-button">
+                            <i class="bx bx-edit"></i>
+                          </button>
+                          <button class="delete-button">
+                            <i class="bx bx-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+              `;
+              tableBody.insertAdjacentHTML("beforeend", row)
+            })
+          }
+        }
+        xhr.send();
+        
+      }
+
+      let productId = 0;
+      function getProductInfo(name){
+        const nameInput = document.querySelector("#edit-product-name");
+        const priceInput = document.querySelector("#edit-product-price");
+        const imageInput = document.querySelector("#edit-product-image");
+        const descriptionInput = document.querySelector("#description");
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "getProductInfo.php?product_name=" + name, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            nameInput.value = response.name;
+            priceInput.value = response.price;
+            descriptionInput.value = response.description;
+            productId = response.product_id;
+          }
+        }
+        xhr.send();
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
+
+        const editButtons = document.querySelectorAll(".edit-button");
+        const deleteButtons = document.querySelectorAll(".delete-button");
+        const editModal = document.getElementById("edit-modal");
+        const deleteModal = document.getElementById("delete-modal");
+        const cancelEdit = document.getElementById("cancel-edit");
+        const cancelDelete = document.getElementById("cancel-delete");
+        const confirmDelete = document.getElementById("confirm-delete");
+
+        editButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            editModal.style.display = "flex";
+          });
+        });
+
+        cancelEdit.addEventListener("click", () => {
+          editModal.style.display = "none";
+        });
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            deleteModal.style.display = "flex";
+          });
+        });
+
+        cancelDelete.addEventListener("click", () => {
+          deleteModal.style.display = "none";
+        });
+
+        [editModal, deleteModal].forEach((modal) => {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              modal.style.display = "none";
+            }
+          });
+        });
+
         const saveChangesButton = document.querySelector(
           '#edit-product-form button[type="submit"]'
         );
         const confirmDeleteButton = document.getElementById("confirm-delete");
 
-        saveChangesButton.addEventListener("click", (e) => {
-          e.preventDefault();
-          
-          showToast("Changes Saved Successfully!", "success");
-          document.getElementById("edit-modal").style.display = "none";
+        
+
+        let orderName = "";
+
+        const tableBody = document.querySelector("table tbody");
+        tableBody.addEventListener("click", (event) => {
+          if (event.target.closest(".edit-button")) {
+            const button = event.target.closest(".edit-button");
+            const row = button.closest("tr");
+            orderName = row.querySelectorAll("td")[1].textContent; 
+            editModal.style.display = "flex";
+            getProductInfo(orderName);
+
+          }
+          if(event.target.closest(".delete-button")){
+            const button = event.target.closest(".delete-button");
+            const row = button.closest("tr");
+            orderName = row.querySelectorAll("td")[1].textContent;
+            deleteModal.style.display = "flex";
+          }
         });
 
+        saveChangesButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          const nameInput = document.querySelector("#edit-product-name").value;
+          const priceInput = document.querySelector("#edit-product-price").value;
+          const descriptionInput = document.querySelector("#description").value;
+          updateProduct(nameInput, priceInput, descriptionInput);
+          document.getElementById("edit-modal").style.display = "none";
+        });
+        
         confirmDeleteButton.addEventListener("click", () => {
           showToast("Product Deleted Successfully!", "error");
           document.getElementById("delete-modal").style.display = "none";
         });
+
+
+        populateTable();
       });
+
+      function updateProduct(name, price, description){
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "updateProduct.php?product_id="+ productId +"&name=" + name + "&price=" + price + "&description=" + description, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            if(response.status == "success"){
+              populateTable();
+              showToast("Changes Saved Successfully!", "success");
+            }
+          }
+        }
+        xhr.send();
+      }
     </script>
   </body>
 </html>
