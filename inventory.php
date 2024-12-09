@@ -225,18 +225,20 @@ if(isset($_SESSION['id'])){
         function populateProductVariant(productId){
           const switchVariant = document.querySelector("#product_variants");
           const xhr = new XMLHttpRequest();
-          xhr.open("GET", "populateProductVariant.php?id=" + productId, true);//not quite sure how to handle passing product_id
+          xhr.open("GET", "getSwitches.php", true);
           xhr.onload = function(){
             if(xhr.readyState == 4 && xhr.status == 200){
               const response = JSON.parse(xhr.responseText);
-              switchVariant.innerHTML = ''
+              console.log(response);
+              switchVariant.innerHTML = '';
 
               response.forEach((variant) => {
                 const option = document.createElement("option");
                 option.value = variant.switch_id;
-                option.textContent = variant.switch_variant;
+                option.textContent = variant.name;
                 switchVariant.appendChild(option);
               });
+              populateStockTable();
             }
           }
           xhr.send();
@@ -248,7 +250,6 @@ if(isset($_SESSION['id'])){
           xhr.onload = function(){
             if(xhr.readyState == 4 && xhr.status == 200){
               const response = JSON.parse(xhr.responseText);
-              console.log(response);
             }
           }
           xhr.send();
