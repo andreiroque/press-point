@@ -222,7 +222,7 @@ if(isset($_SESSION['id'])){
           xhr.send();
         }
 
-        function populateProductVariant(productId){
+        function populateProductVariant(){
           const switchVariant = document.querySelector("#product_variants");
           const xhr = new XMLHttpRequest();
           xhr.open("GET", "getSwitches.php", true);
@@ -238,7 +238,6 @@ if(isset($_SESSION['id'])){
                 option.textContent = variant.name;
                 switchVariant.appendChild(option);
               });
-              populateStockTable();
             }
           }
           xhr.send();
@@ -303,17 +302,6 @@ if(isset($_SESSION['id'])){
           }
           xhr.send();
         }
-
-      document.querySelector("#product_name").addEventListener("change", function() {
-        const productId = this.value;
-        if(productId){
-          populateProductVariant(productId);
-        }else{
-          const variantDropdown = document.querySelector("#product_variants");
-          variantDropdown.innerHTML = '';
-        }
-      });
-
       document.querySelector("#form").addEventListener("submit", (e)=> {
         e.preventDefault();
         const productId = document.querySelector("#product_name").value;
@@ -324,15 +312,7 @@ if(isset($_SESSION['id'])){
 
       document.addEventListener("DOMContentLoaded", () => {
         populateProductName();
-        setTimeout(() => {
-          const productId = document.querySelector("#product_name").value;
-          if(productId){
-            populateProductVariant(productId);
-          }else{
-            const variantDropdown = document.querySelector("#product_variants");
-            variantDropdown.innerHTML = '';
-          }
-        }, 100);
+        populateProductVariant();
         populateStockTable();
       });
     </script>

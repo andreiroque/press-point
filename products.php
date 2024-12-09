@@ -274,7 +274,7 @@ if(isset($_SESSION['id'])){
         xhr.onload = function(){
           if(xhr.readyState == 4 && xhr.status == 200){
             const response = JSON.parse(xhr.responseText);
-            console.log(response);
+            // console.log(response);
             if(response.status == "success"){
               form.reset();
               showToast(response.message, "success")
@@ -399,6 +399,7 @@ if(isset($_SESSION['id'])){
             const row = button.closest("tr");
             orderName = row.querySelectorAll("td")[1].textContent;
             deleteModal.style.display = "flex";
+            getProductInfo(orderName);
           }
         });
 
@@ -412,7 +413,7 @@ if(isset($_SESSION['id'])){
         });
         
         confirmDeleteButton.addEventListener("click", () => {
-          showToast("Product Deleted Successfully!", "error");
+          deleteProduct();
           document.getElementById("delete-modal").style.display = "none";
         });
 
@@ -429,6 +430,22 @@ if(isset($_SESSION['id'])){
             if(response.status == "success"){
               populateTable();
               showToast("Changes Saved Successfully!", "success");
+            }
+          }
+        }
+        xhr.send();
+      }
+
+      function deleteProduct(){
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "deleteProduct.php?product_id=" + productId, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if(response.status == "success"){
+              populateTable();
+              showToast(response.message, "error");
             }
           }
         }

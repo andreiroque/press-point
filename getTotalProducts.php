@@ -3,7 +3,7 @@
 include 'connection.php';
 
 
-$query = "SELECT COUNT(name) as total_products FROM products";
+$query = "SELECT COUNT(name) AS total_products FROM products WHERE status='Shown'";
 
 $result = mysqli_query($conn, $query);
 

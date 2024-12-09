@@ -3,7 +3,7 @@
 include 'connection.php';
 
 
-$query = "SELECT product_id, name AS product_name FROM products";
+$query = "SELECT product_id, name AS product_name FROM products WHERE status='Shown'";
 $result = mysqli_query($conn, $query);
 $products = [];
 

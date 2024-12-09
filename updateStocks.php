@@ -17,7 +17,7 @@ if (isset($_GET['product_id']) && isset($_GET['switch_id']) && isset($_GET['quan
         if (mysqli_query($conn, $updateQuery)) {
             $query1 = "UPDATE products SET received_at = CURRENT_TIMESTAMP() WHERE product_id = '$product_id'";
             if (mysqli_query($conn, $query1)) {
-                echo json_encode(["status" => "success", "message" => "Stock updated successfully and received_at updated!"]);
+                echo json_encode(["status" => "success", "message" => "Stock updated successfully"]);
             } else {
                 echo json_encode(["status" => "error", "message" => "Failed to update received_at"]);
             }
@@ -29,7 +29,7 @@ if (isset($_GET['product_id']) && isset($_GET['switch_id']) && isset($_GET['quan
         if (mysqli_query($conn, $insertQuery)) {
             $query1 = "UPDATE products SET received_at = CURRENT_TIMESTAMP() WHERE product_id = '$product_id'";
             if (mysqli_query($conn, $query1)) {
-                echo json_encode(["status" => "success", "message" => "New product variant added, stock updated, and received_at updated!"]);
+                echo json_encode(["status" => "success", "message" => "Stock updated successfully!"]);
             } else {
                 echo json_encode(["status" => "error", "message" => "Failed to update received_at"]);
             }
