@@ -209,6 +209,12 @@ if(isset($_SESSION['id'])){
           </form>
         </div>
       </div>
+
+
+      <div id="toast" class="toast hidden">
+        <p class="message"></p>
+      </div>
+
     </div>
 
     <script>
@@ -357,7 +363,15 @@ if(isset($_SESSION['id'])){
           if(xhr.readyState == 4 && xhr.status == 200){
             const response = JSON.parse(xhr.responseText);
             if(response.status == "success"){
-              console.log(response);
+              const message = document.querySelector(".message");
+              message.innerHTML = response.message;
+              const toast = document.getElementById("toast");
+              toast.classList.remove("hidden");
+              toast.classList.add("show");
+              setTimeout(() => {
+              toast.classList.remove("show");
+              toast.classList.add("hidden");
+              }, 5000);
               getTotalOrders();
               getPendingOrders();
               getShippedOrders();
