@@ -13,9 +13,10 @@ if(isset($_SESSION['id']) && isset($_GET['total'])){
     $order_id = mysqli_insert_id($conn);
     $_SESSION['order_id'] = $order_id;  
 
-    $query1 = "UPDATE cart SET status='Checked Out' WHERE user_id='$user_id' AND state='New'";
+
+    $query1 = "UPDATE cart SET status='Checked Out' WHERE user_id='$user_id' AND state='New' AND status='Added'";
     if(mysqli_query($conn, $query1)){
-      $query2 = "SELECT p.product_id, s.switch_id, c.quantity, p.price FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN switches s ON c.switch_id = s.switch_id WHERE c.user_id='$user_id' AND c.state='New'";
+      $query2 = "SELECT p.product_id, s.switch_id, c.quantity, p.price FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN switches s ON c.switch_id = s.switch_id WHERE c.user_id='$user_id' AND c.state='New' AND c.status !='Removed'";
       $result = mysqli_query($conn, $query2);
       if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_assoc($result)){
