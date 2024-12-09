@@ -333,7 +333,7 @@ if(isset($_SESSION['id'])){
                         <tr>
                           <td>${data.order_id}</td>
                           <td>${data.product_details}</td>
-                          <td>${data.total_price}</td>
+                          <td>₱ ${data.total_price}</td>
                           <td>${data.status}</td>
                           <td>${data.created_at}</td>
                           <td>

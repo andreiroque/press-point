@@ -120,17 +120,18 @@ if(isset($_SESSION['id'])){
       <main>
         <div class="recent-grid">
           <div class="form-section">
-            <form>
-              <input type="text" placeholder="Product Description" required />
-              <input type="file" required />
-              <input type="text" placeholder="Product Name" required />
+            <form method="POST" id="add-product-form" enctype="multipart/form-data">
+              <input type="text" placeholder="Product Name" name="product_name" required />
               <input
-                type="number"
+              type="number"
                 placeholder="Product Price"
                 min="100"
+                name="product_price"
                 required
               />
-              <button type="submit">Add New Product</button>
+              <input type="file" name="picture" required />
+              <input type="text" placeholder="Product Description" name="description" required />
+              <button type="submit" id="submit-btn">Add New Product</button>
             </form>
           </div>
 
@@ -295,6 +296,28 @@ if(isset($_SESSION['id'])){
         }, 5000);
       }
 
+
+      const form = document.querySelector("#add-product-form");
+      form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        addNewProduct();
+      })
+      function addNewProduct(){
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "addNewProducts.php", true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if(response.status == "success"){
+              form.reset();
+            }
+          }
+        }
+        xhr.send(formData);
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
         const saveChangesButton = document.querySelector(
           '#edit-product-form button[type="submit"]'
@@ -303,6 +326,7 @@ if(isset($_SESSION['id'])){
 
         saveChangesButton.addEventListener("click", (e) => {
           e.preventDefault();
+          
           showToast("Changes Saved Successfully!", "success");
           document.getElementById("edit-modal").style.display = "none";
         });
