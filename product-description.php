@@ -190,6 +190,31 @@ include "connection.php";
         xhr.send();
 
       });
+
+
+
+      document.querySelector(".buy-now").addEventListener("click", (e) => {
+        e.preventDefault();
+        const switch_name = document.querySelector("#switch");
+        const product_id = switch_name.getAttribute("data-product-id");
+        const quantity = document.querySelector("#quantity");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "buyNow.php?product_id=" + product_id + "&switch_name=" + switch_name.value + "&quantity=" + quantity.value, true);
+        xhr.onload = function(){
+          if(xhr.readyState == 4 && xhr.status == 200){
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            if(response.status == "success"){
+              window.location = "shopping-cart.php";
+            }
+            console.log(response);
+          }
+        }
+        xhr.send();
+      });
+
+
     </script>
   </body>
 </html>

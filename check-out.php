@@ -106,12 +106,12 @@ if(!isset($_SESSION['id'])){
                         $user_id = $_SESSION['id'];
                         $shipping_fee = 150;
 
-                        $query = "SELECT p.name AS product_name, p.price, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
+                        $query = "SELECT p.name AS product_name, p.price, c.quantity, s.name AS switch_name FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN switches s ON c.switch_id = s.switch_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
                         $result = mysqli_query($conn, $query);
                         if(mysqli_num_rows($result) > 0){
                             while($row = mysqli_fetch_assoc($result)){
-                                echo '<p><a>'. $row['product_name'] .'</a><span class="price">₱ '. $row['price'] .' ('. $row['quantity'] .')</span></p>';
+                                echo '<p><a>'. $row['product_name'] . ' (' . $row['switch_name'] .')</a><span class="price">₱ '. $row['price'] .' ('. $row['quantity'] .')</span></p>';
                             }
                             echo '<p><a>Shipping Fee</a><span class="price">₱ '. $shipping_fee .'.00</span></p>';
                         }

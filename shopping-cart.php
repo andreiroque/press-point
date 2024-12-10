@@ -58,7 +58,7 @@ if(!isset($_SESSION['id'])){
 
                 <?php
                     $user_id = $_SESSION['id'];
-                    $query = "SELECT c.product_id, p.name, p.price, p.picture, c.quantity FROM cart c INNER JOIN products p ON c.product_id = p.product_id WHERE c.user_id='$user_id' AND c.status='Added'";
+                    $query = "SELECT c.product_id, p.name, p.price, p.picture, c.quantity, s.name AS switch_name FROM cart c INNER JOIN products p ON c.product_id = p.product_id INNER JOIN switches s ON c.switch_id = s.switch_id WHERE c.user_id='$user_id' AND c.status='Added'";
 
                     $result = mysqli_query($conn, $query);
 
@@ -72,6 +72,7 @@ if(!isset($_SESSION['id'])){
                                             <div>
                                                 <p>'. $row['name'] .'</p>
                                                 <p><strong>₱</strong> '. $row['price'] .'</p>
+                                                <p>'. $row['switch_name'] .'</p>
                                                 <br>
                                                 <a onclick="removeItemFromCart(this)" data-product-id="'. $row['product_id'] .'">Remove</a>
                                             </div>
