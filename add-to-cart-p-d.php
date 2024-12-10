@@ -18,12 +18,6 @@ if (isset($_SESSION['id']) && isset($_GET['product_id']) && isset($_GET['switch_
     if (mysqli_num_rows($switch_result) > 0) {
         $row = mysqli_fetch_assoc($switch_result);
         $switch_id = $row['switch_id'];
-        $stock = $row['stock'];
-
-        if ($stock < $quantity) {
-            echo json_encode(["status" => "error", "message" => "Not enough stock available!"]);
-            exit;
-        }
 
         $checkQuery = "SELECT quantity FROM cart WHERE user_id = '$user_id' AND product_id = '$prod_id' AND switch_id = '$switch_id'";
         $checkResult = mysqli_query($conn, $checkQuery);
