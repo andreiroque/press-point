@@ -19,14 +19,14 @@ if (isset($_GET['product_id']) && isset($_SESSION['id'])) {
         $row = mysqli_fetch_assoc($result);
         $switch_id = $row['switch_id'];
 
-        $checkQuery = "SELECT quantity FROM cart WHERE user_id = '$user_id' AND product_id = '$product_id' AND switch_id = '$switch_id'";
+        $checkQuery = "SELECT quantity FROM cart WHERE user_id = '$user_id' AND product_id = '$product_id' AND switch_id = '$switch_id' AND status='Added'";
         $checkResult = mysqli_query($conn, $checkQuery);
 
         if (mysqli_num_rows($checkResult) > 0) {
             $existing = mysqli_fetch_assoc($checkResult);
             $newQuantity = $existing['quantity'] + $quantity;
 
-            $updateQuery = "UPDATE cart SET quantity = $newQuantity WHERE user_id = '$user_id' AND product_id = '$product_id' AND switch_id = '$switch_id'";
+            $updateQuery = "UPDATE cart SET quantity = $newQuantity WHERE user_id = '$user_id' AND product_id = '$product_id' AND switch_id = '$switch_id' AND status='Added'";
             if (mysqli_query($conn, $updateQuery)) {
                 echo "Quantity updated successfully!";
             } else {

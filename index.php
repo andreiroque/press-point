@@ -39,7 +39,10 @@ if(isset($_SESSION['id'])){
         </ul>
 
         <div class="navigation-icon">
-            <a href="#"><i class='bx bx-search'></i></a>
+            <form method="GET" action="#shop">
+                <input type="search" name="search" id="search" placeholder="Search products...">
+                <button type="submit"><i class='bx bx-search'></i></button>
+            </form>
             <a href="sign-in.php"><i class='bx bx-user'></i></a>
             <span class="cart" data-count="0">
                 <a href="shopping-cart.php"><i class='bx bx-cart'></i></a>
@@ -115,24 +118,36 @@ if(isset($_SESSION['id'])){
         <div class="filter-container">
             <div class="category-head">
                 <ul>
-                    <div class="category-title" id="all">
+                    <a href="index.php#shop">
+                        <div class="category-title" id="all">
                         <li>All</li>
-                    </div>
-                    <div class="category-title" id="compact">
-                        <li>Compact</li>
-                    </div>
-                    <div class="category-title" id="ergonomic">
-                        <li>Ergonomic</li>
-                    </div>
-                    <div class="category-title" id="gaming">
-                        <li>Gaming</li>
-                    </div>
-                    <div class="category-title" id="mechanical">
-                        <li>Mechanical</li>
-                    </div>
-                    <div class="category-title" id="standard">
-                        <li>Standard</li>
-                    </div>
+                        </div>
+                    </a>
+                    <a href="index.php?category=Clicky#shop">
+                        <div class="category-title" id="compact">
+                            <li>Clicky</li>
+                        </div>
+                    </a>
+                    <a href="index.php?category=Linear#shop">
+                        <div class="category-title" id="ergonomic">
+                            <li>Linear</li>
+                        </div>
+                    </a>
+                    <a href="index.php?category=Tactile#shop">
+                        <div class="category-title" id="gaming">
+                            <li>Tactile</li>
+                        </div>
+                    </a>
+                    <a href="index.php?category=Optical#shop">
+                        <div class="category-title" id="mechanical">
+                            <li>Optical</li>
+                        </div>
+                    </a>
+                    <a href="index.php?category=Membrane#shop">
+                        <div class="category-title" id="standard">
+                            <li>Membrane</li>
+                        </div>
+                    </a>
                 </ul>
             </div>
         </div>
@@ -140,45 +155,58 @@ if(isset($_SESSION['id'])){
         <div class="product-list">
             <?php
 
-                $query = "SELECT * FROM products";
+
+                $query = "SELECT DISTINCT p.product_id,p.name, FORMAT(p.price, 2) AS price, p.picture FROM products p INNER JOIN product_variants pv ON p.product_id = pv.product_id INNER JOIN switches s ON pv.switch_id = s.switch_id  WHERE p.status='Shown' ORDER BY p.product_id ASC";
+
+                if(isset($_GET['category']) && $_GET['category'] != "All"){
+                    $category = $_GET['category'];
+                    $query = "SELECT DISTINCT p.product_id,p.name, FORMAT(p.price, 2) AS price, p.picture FROM products p INNER JOIN product_variants pv ON p.product_id = pv.product_id INNER JOIN switches s ON pv.switch_id = s.switch_id  WHERE p.status='Shown' AND s.name='$category' ORDER BY p.product_id ASC ";
+                }
+
+                if(isset($_GET['search']) && !empty($_GET['search'])){
+                    $search = $_GET['search'];
+                    $query = "SELECT DISTINCT p.product_id,p.name, FORMAT(p.price, 2) AS price, p.picture FROM products p INNER JOIN product_variants pv ON p.product_id = pv.product_id INNER JOIN switches s ON pv.switch_id = s.switch_id  WHERE p.status='Shown' AND p.name LIKE '%$search%' ORDER BY p.product_id ASC";
+                }
+                
+                
                 $result = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){
-                        if($row['status'] == "Shown"){
-                            echo '
-                            <div class="row">
-                                <div class="img">
-                                    <img src="product-images/'. $row['picture'] .'" alt="image">
-                                </div>
-                                <div class="rating">
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                    <i class="bx bxs-star"></i>
-                                </div>
-                                <div class="price">
-                                    <h2>'. $row['name'] .'</h2>
-                                    <p><strong>₱</strong> '. $row['price'] .'</p>
-                                </div>
-                                <div class="view-icon">
-                                    <a href="product-description.php?id='. $row['product_id'] .'">
-                                        <button class="button-icon">
-                                            <i class="bx bx-right-arrow-circle"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                                <div class="add-to-cart">
-                                    <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'">
-                                        <button class="button-icon">
-                                            <i class="bx bx-plus-circle"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>';
-                        }
+                        echo '
+                        <div class="row">
+                            <div class="img">
+                                <img src="product-images/'. $row['picture'] .'" alt="image">
+                            </div>
+                            <div class="rating">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                            </div>
+                            <div class="price">
+                                <h2>'. $row['name'] .'</h2>
+                                <p><strong>₱</strong> '. $row['price'] .'</p>
+                            </div>
+                            <div class="view-icon">
+                                <a href="product-description.php?id='. $row['product_id'] .'">
+                                    <button class="button-icon">
+                                        <i class="bx bx-right-arrow-circle"></i>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="add-to-cart">
+                                <a onclick="addToCart(this)" data-product-id="'. $row['product_id'] .'">
+                                    <button class="button-icon">
+                                        <i class="bx bx-plus-circle"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>';
                     }
+                }else{
+                    echo '<p>No products found!</p>';
                 }
 
             ?>
