@@ -42,7 +42,7 @@ body {
     position: absolute;
     display: var(--display);
     background-image: var(--url);
-    background-size: 300%;
+    background-size: 200%;
     background-repeat: no-repeat;
     background-position: var(--zoom-x) var(--zoom-y);
 }
