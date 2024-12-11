@@ -101,7 +101,7 @@ if(isset($_SESSION['id'])){
               ><input type="checkbox" onclick="showHidePassword()" /> Show
               Password</label
             >
-            <a href="#">Forgot Password?</a>
+            <a href="forgot-password.php">Forgot Password?</a>
           </div>
           <button type="submit" class="sign-in-button">Sign In</button>
         </form>
