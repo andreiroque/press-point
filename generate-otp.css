@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", serif;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  text-decoration: none;
+}
+main{
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.otp-container{
+  max-width: 450px;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 16px;
+}
+.icon-container{
+  margin-top: 80px;
+}
+.circle{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: rgb(120, 180, 205);
+  display: grid;
+  place-items: center;
+  color: white;
+}
+.circle i{
+  font-size: 4rem;
+}
+.title p{
+  font-size: 2rem;
+}
+
+.otp-codes form{
+  height: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.otp-codes .input-codes{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.otp-codes input[type="text"]{
+  height: 60px;
+  width: 12%;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  text-align: center;
+  border-radius: 8px;
+}
+.submit-btn button{
+  background: rgb(120, 180, 205);
+  color: white;
+  padding: 15px 50px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.4s;
+}
+
+.submit-btn button:hover{
+  background-color: white;
+  border: 1px solid rgb(120, 180, 205);
+  color: rgb(120, 180, 205);
+}
