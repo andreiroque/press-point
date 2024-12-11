@@ -172,7 +172,7 @@ if(!isset($_SESSION['id'])){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     // do something :)
                    const grand_total = JSON.parse(xhr.responseText);
-                   document.querySelector(".grand-total").innerHTML = grand_total === null ? "" : "Total: ₱ " + grand_total;
+                   document.querySelector(".grand-total").innerHTML = grand_total === null ? "" : "Sub total: ₱ " + grand_total;
                 }
             }
             xhr.send();

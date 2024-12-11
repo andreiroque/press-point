@@ -55,7 +55,7 @@ include "connection.php";
         echo '<script>window.location="index.php"</script>';
       }
 
-      $query1 = "SELECT * FROM products WHERE product_id='$prodId'";
+      $query1 = "SELECT name, picture, description, FORMAT(price, 2) AS price FROM products WHERE product_id='$prodId'";
       $result1 = mysqli_query($conn, $query1);
 
 
@@ -69,7 +69,7 @@ include "connection.php";
         while($row1 = mysqli_fetch_assoc($result1)){
           echo '
           <div class="container">
-            <div class="image-section">
+            <div class="image-section" style="--url: url(product-images/'. $row1['picture'] .'); --zoom-x: 0%; --zoom-y: 0%; --display: none;">
               <img src="product-images/'. $row1['picture'] .'" alt="image">
             </div>
             <div class="details-section">
@@ -125,11 +125,29 @@ include "connection.php";
     </div>
 
     <script>
+      const imageSection = document.querySelector(".image-section");
       const quantityinput = document.getElementById("quantity");
       const decrease = document.getElementById("decrease");
       const increase = document.getElementById("increase");
       let maxStock = 1;
+
+      imageSection.addEventListener("mousemove", (e)=>{
+        imageSection.style.setProperty("--display", "block");
+
+        let mouse = {
+          x: (e.offsetX * 100) / imageSection.offsetWidth,
+          y: (e.offsetY * 100) / imageSection.offsetHeight
+        }
+
+        imageSection.style.setProperty("--zoom-x", `${mouse.x}%`);
+        imageSection.style.setProperty("--zoom-y", `${mouse.y}%`);
+        
+      });
       
+      imageSection.addEventListener("mouseleave", ()=>{
+        imageSection.style.setProperty("--display", "none");
+      });
+
       const checkSlot = (select) => {
         quantityinput.value = 1;
         const productId = select.getAttribute("data-product-id");

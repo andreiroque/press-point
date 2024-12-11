@@ -21,12 +21,32 @@ body {
 .image-section {
     border: 1.5px solid rgb(120, 180, 205);
     flex: 1;
-    min-width: 300px;
+    height: 620px;
+    width: 620px;
+    position: relative;
+    overflow: hidden;
 }
 
 .image-section img {
     width: 100%;
+    object-position: 0 0;
 }
+
+.image-section::after{
+    content: "";
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: var(--display);
+    background-image: var(--url);
+    background-size: 300%;
+    background-repeat: no-repeat;
+    background-position: var(--zoom-x) var(--zoom-y);
+}
+
 
 .details-section {
     background: rgb(255, 255, 255);
