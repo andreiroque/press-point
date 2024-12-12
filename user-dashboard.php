@@ -3,25 +3,6 @@ session_start();
 
 include 'connection.php';
 
-if(!isset($_SESSION['id'])){
-    echo '<script>alert("Please login or sign up first!")</script>';
-    echo '<script>window.location="sign-in.php"</script>';
-}
-
-
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $user_id = $_SESSION['id'];
-    $full_name = $_POST['fullname'];
-    $phone_no = $_POST['phone_number'];
-    $u_address = $_POST['address'];
-
-    $query1 = "UPDATE users SET name='$full_name', phone_number='$phone_no', address='$u_address' WHERE user_id='$user_id'";
-    if(mysqli_query($conn, $query1)){
-        echo '<script>alert("Successfully updated user information!")</script>';
-    }else{
-        echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
-    }
-}
 
 ?>
 
@@ -32,6 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="user-dashboard.css">
+    <link rel="icon" href="product-images/press-point-logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
@@ -41,9 +23,58 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <title>User Dashboard</title>
+    <script>
+        function displayUpdateInfoModal(){
+          setTimeout(() => {
+            
+            const modal = document.querySelector("#update-modal");
+            const confirm = document.querySelector("#update-modal #confirm");
+    
+            modal.style.display = "flex";
+            confirm.addEventListener("click", ()=>{
+              modal.style.display = "none";
+              window.location="user-dashboard.php";
+            });
+          }, 100);
+        }
+        function displayLoginModal(){
+          setTimeout(() => {
+            
+            const modal = document.querySelector("#login-modal");
+            const confirm = document.querySelector("#login-modal #confirm");
+    
+            modal.style.display = "flex";
+            confirm.addEventListener("click", ()=>{
+              modal.style.display = "none";
+              window.location="sign-in.php";
+            });
+          }, 100);
+        }
+    </script>
 </head>
 
 <body>
+    <?php        
+        if(!isset($_SESSION['id'])){
+            echo '<script>displayLoginModal();</script>';
+        }
+
+        
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $user_id = $_SESSION['id'];
+            $full_name = $_POST['fullname'];
+            $phone_no = $_POST['phone_number'];
+            $u_address = $_POST['address'];
+
+            $query1 = "UPDATE users SET name='$full_name', phone_number='$phone_no', address='$u_address' WHERE user_id='$user_id'";
+            if(mysqli_query($conn, $query1)){
+                echo '<script>displayUpdateInfoModal()</script>';
+            }else{
+                echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
+            }
+        }
+
+    ?>
     <input type="checkbox" id="navigation-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -114,7 +145,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         </div>
 
     </div>
-
+    <div class="modal" id="update-modal">
+      <div class="modal-content">
+        <h1>User Dashboard</h1>
+        <p>Changes saved successfully!</p>
+        <div class="modal-buttons">
+          <button id="confirm">Okay</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="login-modal">
+      <div class="modal-content">
+        <h1>Log In</h1>
+        <p>Please log in or sign up first!</p>
+        <div class="modal-buttons">
+          <button id="confirm">Okay</button>
+        </div>
+      </div>
+    </div>
     <script>
         function getUserInfo (){
             const name = document.querySelector(".name");

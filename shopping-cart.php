@@ -3,13 +3,6 @@ session_start();
 
 
 include 'connection.php';
-
-if(!isset($_SESSION['id'])){
-    echo '<script>alert("Please Login or Sign Up first!")</script>';
-    echo '<script>window.location="sign-in.php"</script>';
-}
-
-
 ?>
 
 <head>
@@ -17,6 +10,7 @@ if(!isset($_SESSION['id'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="shopping-cart.css">
+    <link rel="icon" href="product-images/press-point-logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
@@ -26,10 +20,29 @@ if(!isset($_SESSION['id'])){
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <title>Shopping Cart</title>
+    <script>
+        function displayModal(){
+            setTimeout(() => {
+            
+            const modal = document.querySelector(".modal");
+            const confirm = document.querySelector("#confirm");
+    
+            modal.style.display = "flex";
+            confirm.addEventListener("click", ()=>{
+                window.location="sign-in.php";
+                modal.style.display = "none";
+            });
+          }, 20);
+        }
+    </script>
 </head>
 
 <body>
-
+    <?php
+        if(!isset($_SESSION['id'])){
+            echo '<script>displayModal();</script>';
+        }
+    ?>
     <header>
         <a href="index.php" class="logo"><img src="product-images/press-point-logo.png" alt=""></a>
         <ul class="navigationmenu">
@@ -102,6 +115,15 @@ if(!isset($_SESSION['id'])){
         </table>
         <div>
         </div>
+    </div>
+    <div class="modal" id="delete-modal">
+      <div class="modal-content">
+        <h1>Shopping Cart</h1>
+        <p>Please login or sign up first!</p>
+        <div class="modal-buttons">
+          <button id="confirm">Okay</button>
+        </div>
+      </div>
     </div>
     <script>
 

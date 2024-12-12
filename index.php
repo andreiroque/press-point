@@ -25,6 +25,7 @@ if(isset($_SESSION['id'])){
     integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="icon" href="product-images/press-point-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./press-point.css">
     <title>Press Point</title>
 </head>

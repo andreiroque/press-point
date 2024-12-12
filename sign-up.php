@@ -3,24 +3,7 @@ session_start();
 
 include "connection.php";
 
-if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-  $name = $_POST['name'];
-  $email = $_POST['email-address'];
-  $password = $_POST['password'];
-
-  $query = "INSERT INTO users(name, email, password) VALUES ('$name', '$email', '$password')";
-  
-  if(mysqli_query($conn, $query)){
-    echo '<script>alert("Successfully Registered!")</script>';
-    echo '<script>window.location="sign-in.php"</script>';
-  }else{
-    echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
-  }
-
-  
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="sign-up.css" />
+    <link rel="icon" href="product-images/press-point-logo.png" type="image/x-icon">
     <link
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
@@ -38,9 +22,41 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
     />
     <title>Press Point - Sign Up</title>
+    <script>
+      function displaySignUpModal(){
+          setTimeout(() => {
+            
+            const modal = document.querySelector("#sign-up-modal");
+            const confirm = document.querySelector("#confirm");
+    
+            modal.style.display = "flex";
+            confirm.addEventListener("click", ()=>{
+              modal.style.display = "none";
+              window.location="sign-in.php";
+            });
+          }, 100);
+        }
+    </script>
   </head>
 
   <body>
+    <?php
+      if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+        $name = $_POST['name'];
+        $email = $_POST['email-address'];
+        $password = $_POST['password'];
+      
+        $query = "INSERT INTO users(name, email, password) VALUES ('$name', '$email', '$password')";
+        
+        if(mysqli_query($conn, $query)){
+          echo '<script>displaySignUpModal()</script>';
+        }else{
+          echo '<script>alert("Error: '. mysqli_error($conn) .'")</script>';
+        }
+      }
+
+    ?>
     <header>
       <a href="index.php" class="logo"
         ><img src="product-images/press-point-logo.png" alt=""
@@ -85,7 +101,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
               <input type="password" id="confirm-password" />
             </div>
             <div class="actions">
-              <label><input type="checkbox" /> Show Password</label>
+              <label><input type="checkbox" onclick="showHidePassword()"/> Show Password</label>
             </div>
             <button type="submit" class="sign-in-button">Sign Up</button>
           </form>
@@ -95,7 +111,60 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         </div>
       </div>
     </div>
-    <script src="press-point.js"></script>
+
+    <div class="modal" id="sign-up-modal">
+      <div class="modal-content">
+        <h1>Sign up</h1>
+        <p>You have created an account successfully!</p>
+        <div class="modal-buttons">
+          <button id="confirm">Okay</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="no-account-modal">
+      <div class="modal-content">
+        <h1>Sign up</h1>
+        <p>Passwords does not match! please try again</p>
+        <div class="modal-buttons">
+          <button id="confirm">Okay</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const password = document.querySelector("#password").value;
+        const confirmPassword = document.querySelector("#confirm-password").value;
+        if(password != confirmPassword){
+          setTimeout(() => {
+            
+            const modal = document.querySelector("#no-account-modal");
+            const confirm = document.querySelector("#no-account-modal #confirm");
+    
+            modal.style.display = "flex";
+            confirm.addEventListener("click", ()=>{
+              modal.style.display = "none";
+            });
+          }, 100);
+        }else{
+          form.submit();
+        }
+      });
+      
+      function showHidePassword(){
+        const password = document.querySelector("#password");
+        const confirmPassword = document.querySelector("#confirm-password");
+        if(password.type === "password" && confirmPassword.type === "password"){
+          password.type = "text";
+          confirmPassword.type = "text";
+        }else{
+          password.type = "password";
+          confirmPassword.type = "password";
+        }
+      }
+    </script>
   </body>
 </html>
 
